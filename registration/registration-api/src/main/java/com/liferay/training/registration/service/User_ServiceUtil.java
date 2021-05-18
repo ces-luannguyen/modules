@@ -37,6 +37,29 @@ public class User_ServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.training.registration.service.impl.User_ServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.training.registration.model.User_ addUser_(
+			String userName, String firstName, String lastName,
+			String emailAddress, boolean male, java.util.Date birthDay,
+			String password, String confirmPassword, String homePhone,
+			String mobilePhone, String address1, String address2, String city,
+			String state, String zipCode, String securityQuestion,
+			String answer, boolean termsOfUse,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().addUser_(
+			userName, firstName, lastName, emailAddress, male, birthDay,
+			password, confirmPassword, homePhone, mobilePhone, address1,
+			address2, city, state, zipCode, securityQuestion, answer,
+			termsOfUse, serviceContext);
+	}
+
+	public static com.liferay.training.registration.model.User_ deleteUser_(
+			long userId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().deleteUser_(userId);
+	}
 
 	/**
 	 * Returns the OSGi service identifier.
@@ -45,6 +68,30 @@ public class User_ServiceUtil {
 	 */
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static com.liferay.training.registration.model.User_ getUser_(
+			long userId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getUser_(userId);
+	}
+
+	public static com.liferay.training.registration.model.User_ updateUser__(
+			long userId, String userName, String firstName, String lastName,
+			String emailAddress, boolean male, java.util.Date birthDate,
+			String password, String confirmPassword, String homePhone,
+			String mobilePhone, String address1, String address2, String city,
+			String state, String zipCode, String securityQuestion,
+			String answer, boolean termsOfUse,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updateUser__(
+			userId, userName, firstName, lastName, emailAddress, male,
+			birthDate, password, confirmPassword, homePhone, mobilePhone,
+			address1, address2, city, state, zipCode, securityQuestion, answer,
+			termsOfUse, serviceContext);
 	}
 
 	public static User_Service getService() {

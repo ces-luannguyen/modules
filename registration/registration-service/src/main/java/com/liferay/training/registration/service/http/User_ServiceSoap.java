@@ -14,9 +14,15 @@
 
 package com.liferay.training.registration.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.training.registration.service.User_ServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
- * <code>com.liferay.training.registration.service.User_ServiceUtil</code> service
+ * <code>User_ServiceUtil</code> service
  * utility. The static methods of this class call the same methods of the
  * service utility. However, the signatures are different because it is
  * difficult for SOAP to support certain types.
@@ -54,4 +60,100 @@ package com.liferay.training.registration.service.http;
  * @generated
  */
 public class User_ServiceSoap {
+
+	public static com.liferay.training.registration.model.User_Soap addUser_(
+			String userName, String firstName, String lastName,
+			String emailAddress, boolean male, java.util.Date birthDay,
+			String password, String confirmPassword, String homePhone,
+			String mobilePhone, String address1, String address2, String city,
+			String state, String zipCode, String securityQuestion,
+			String answer, boolean termsOfUse,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			com.liferay.training.registration.model.User_ returnValue =
+				User_ServiceUtil.addUser_(
+					userName, firstName, lastName, emailAddress, male, birthDay,
+					password, confirmPassword, homePhone, mobilePhone, address1,
+					address2, city, state, zipCode, securityQuestion, answer,
+					termsOfUse, serviceContext);
+
+			return com.liferay.training.registration.model.User_Soap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.liferay.training.registration.model.User_Soap deleteUser_(
+			long userId)
+		throws RemoteException {
+
+		try {
+			com.liferay.training.registration.model.User_ returnValue =
+				User_ServiceUtil.deleteUser_(userId);
+
+			return com.liferay.training.registration.model.User_Soap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.liferay.training.registration.model.User_Soap getUser_(
+			long userId)
+		throws RemoteException {
+
+		try {
+			com.liferay.training.registration.model.User_ returnValue =
+				User_ServiceUtil.getUser_(userId);
+
+			return com.liferay.training.registration.model.User_Soap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.liferay.training.registration.model.User_Soap
+			updateUser__(
+				long userId, String userName, String firstName, String lastName,
+				String emailAddress, boolean male, java.util.Date birthDate,
+				String password, String confirmPassword, String homePhone,
+				String mobilePhone, String address1, String address2,
+				String city, String state, String zipCode,
+				String securityQuestion, String answer, boolean termsOfUse,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			com.liferay.training.registration.model.User_ returnValue =
+				User_ServiceUtil.updateUser__(
+					userId, userName, firstName, lastName, emailAddress, male,
+					birthDate, password, confirmPassword, homePhone,
+					mobilePhone, address1, address2, city, state, zipCode,
+					securityQuestion, answer, termsOfUse, serviceContext);
+
+			return com.liferay.training.registration.model.User_Soap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(User_ServiceSoap.class);
+
 }
