@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -33,6 +34,7 @@ import com.liferay.training.monitor.model.Event;
 
 import java.io.Serializable;
 
+import java.util.Date;
 import java.util.List;
 
 import org.osgi.annotation.versioning.ProviderType;
@@ -69,6 +71,11 @@ public interface EventLocalService
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public Event addEvent(Event event);
+
+	public Event addEvent(
+			long userId, String userName, Date eventDate, String eventType,
+			String ipAddress)
+		throws PortalException;
 
 	/**
 	 * Creates a new event with the primary key. Does not add the event to the database.
@@ -257,5 +264,10 @@ public interface EventLocalService
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public Event updateEvent(Event event);
+
+	public Event updateEvent(
+			long eventId, long userId, String userName, Date eventDate,
+			String eventType, String ipAddress, ServiceContext serviceContext)
+		throws PortalException;
 
 }

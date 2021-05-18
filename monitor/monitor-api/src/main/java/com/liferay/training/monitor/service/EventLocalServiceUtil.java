@@ -50,6 +50,15 @@ public class EventLocalServiceUtil {
 		return getService().addEvent(event);
 	}
 
+	public static com.liferay.training.monitor.model.Event addEvent(
+			long userId, String userName, java.util.Date eventDate,
+			String eventType, String ipAddress)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().addEvent(
+			userId, userName, eventDate, eventType, ipAddress);
+	}
+
 	/**
 	 * Creates a new event with the primary key. Does not add the event to the database.
 	 *
@@ -300,6 +309,17 @@ public class EventLocalServiceUtil {
 		com.liferay.training.monitor.model.Event event) {
 
 		return getService().updateEvent(event);
+	}
+
+	public static com.liferay.training.monitor.model.Event updateEvent(
+			long eventId, long userId, String userName,
+			java.util.Date eventDate, String eventType, String ipAddress,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updateEvent(
+			eventId, userId, userName, eventDate, eventType, ipAddress,
+			serviceContext);
 	}
 
 	public static EventLocalService getService() {
