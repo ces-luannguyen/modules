@@ -37,6 +37,22 @@ public class User_LocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.training.registration.service.impl.User_LocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.training.registration.model.User_ addUser_(
+			String userName, String firstName, String lastName,
+			String emailAddress, boolean male, java.util.Date birthDay,
+			String password, String confirmPassword, String homePhone,
+			String mobilePhone, String address1, String address2, String city,
+			String state, String zipCode, String securityQuestion,
+			String answer, boolean termsOfUse,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().addUser_(
+			userName, firstName, lastName, emailAddress, male, birthDay,
+			password, confirmPassword, homePhone, mobilePhone, address1,
+			address2, city, state, zipCode, securityQuestion, answer,
+			termsOfUse, serviceContext);
+	}
 
 	/**
 	 * Adds the user_ to the database. Also notifies the appropriate model listeners.
@@ -296,6 +312,29 @@ public class User_LocalServiceUtil {
 	 */
 	public static int getUser_sCount() {
 		return getService().getUser_sCount();
+	}
+
+	public static java.util.List<com.liferay.training.registration.model.User_>
+		getUsersByUserName(String userName) {
+
+		return getService().getUsersByUserName(userName);
+	}
+
+	public static com.liferay.training.registration.model.User_ updateUser_(
+			long userId, String userName, String firstName, String lastName,
+			String emailAddress, boolean male, java.util.Date birthDay,
+			String password, String confirmPassword, String homePhone,
+			String mobilePhone, String address1, String address2, String city,
+			String state, String zipCode, String securityQuestion,
+			String answer, boolean termsOfUse,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updateUser_(
+			userId, userName, firstName, lastName, emailAddress, male, birthDay,
+			password, confirmPassword, homePhone, mobilePhone, address1,
+			address2, city, state, zipCode, securityQuestion, answer,
+			termsOfUse, serviceContext);
 	}
 
 	/**

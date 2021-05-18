@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.liferay.training.registration.model.User_">
+		<field name="uuid" type="String" />
+		<field name="userId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="firstName" type="String" />
+		<field name="lastName" type="String" />
+		<field name="emailAddress" type="String" />
+		<field name="male" type="boolean" />
+		<field name="birthDay" type="Date" />
+		<field name="password" type="String" />
+		<field name="confirmPassword" type="String" />
+		<field name="homePhone" type="String" />
+		<field name="mobilePhone" type="String" />
+		<field name="address1" type="String" />
+		<field name="address2" type="String" />
+		<field name="city" type="String" />
+		<field name="state" type="String" />
+		<field name="zipCode" type="String" />
+		<field name="securityQuestion" type="String" />
+		<field name="answer" type="String" />
+		<field name="termsOfUse" type="boolean" />
+	</model>
+</model-hints>

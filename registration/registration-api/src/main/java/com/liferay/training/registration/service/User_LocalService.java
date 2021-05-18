@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -35,6 +36,7 @@ import com.liferay.training.registration.model.User_;
 
 import java.io.Serializable;
 
+import java.util.Date;
 import java.util.List;
 
 import org.osgi.annotation.versioning.ProviderType;
@@ -62,6 +64,14 @@ public interface User_LocalService
 	 *
 	 * Never modify or reference this interface directly. Always use {@link User_LocalServiceUtil} to access the user_ local service. Add custom service methods to <code>com.liferay.training.registration.service.impl.User_LocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public User_ addUser_(
+			String userName, String firstName, String lastName,
+			String emailAddress, boolean male, Date birthDay, String password,
+			String confirmPassword, String homePhone, String mobilePhone,
+			String address1, String address2, String city, String state,
+			String zipCode, String securityQuestion, String answer,
+			boolean termsOfUse, ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	 * Adds the user_ to the database. Also notifies the appropriate model listeners.
@@ -254,6 +264,18 @@ public interface User_LocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUser_sCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<User_> getUsersByUserName(String userName);
+
+	public User_ updateUser_(
+			long userId, String userName, String firstName, String lastName,
+			String emailAddress, boolean male, Date birthDay, String password,
+			String confirmPassword, String homePhone, String mobilePhone,
+			String address1, String address2, String city, String state,
+			String zipCode, String securityQuestion, String answer,
+			boolean termsOfUse, ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	 * Updates the user_ in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
