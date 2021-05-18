@@ -1,0 +1,10 @@
+Bundle-Name: monitor-api
+Bundle-SymbolicName: com.liferay.training.monitor.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.training.monitor.exception,\
+	com.liferay.training.monitor.model,\
+	com.liferay.training.monitor.service,\
+	com.liferay.training.monitor.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../monitor-service/service.xml
