@@ -15,7 +15,12 @@
 package com.liferay.training.monitor.service.impl;
 
 import com.liferay.portal.aop.AopService;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.training.monitor.service.base.EventServiceBaseImpl;
+import com.liferay.training.monitor.model.Event;
+
+import java.util.Date;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -46,4 +51,35 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	 *
 	 * Never reference this class directly. Always use <code>com.liferay.training.monitor.service.EventServiceUtil</code> to access the event remote service.
 	 */
+	public Event addEvent(
+			long userId, String userName, Date eventDate, String eventType, String ipAddress,
+			ServiceContext serviceContext) throws PortalException {
+
+		return eventLocalService.addEvent(userId, userName, eventDate, eventType, ipAddress);
+	}
+
+	public Event deleteEvent(long eventId) throws PortalException {
+
+		Event event = eventLocalService.getEvent(eventId);
+
+		return eventLocalService.deleteEvent(event);
+	}
+
+	public Event getEvent(long eventId) throws PortalException {
+
+		Event event = eventLocalService.getEvent(eventId);
+
+		return event;
+	}
+
+	
+
+	public Event updateEvent_(long eventId, long userId, String userName,
+			Date eventDate, String eventType, String ipAddress, ServiceContext serviceContext) 
+					throws PortalException {
+
+		return eventLocalService.updateEvent(eventId, userId, userName, eventDate, eventType,
+				ipAddress, serviceContext);
+
+	}
 }

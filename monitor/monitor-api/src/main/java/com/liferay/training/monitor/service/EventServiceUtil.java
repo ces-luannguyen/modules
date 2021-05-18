@@ -37,6 +37,29 @@ public class EventServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.training.monitor.service.impl.EventServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.training.monitor.model.Event addEvent(
+			long userId, String userName, java.util.Date eventDate,
+			String eventType, String ipAddress,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().addEvent(
+			userId, userName, eventDate, eventType, ipAddress, serviceContext);
+	}
+
+	public static com.liferay.training.monitor.model.Event deleteEvent(
+			long eventId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().deleteEvent(eventId);
+	}
+
+	public static com.liferay.training.monitor.model.Event getEvent(
+			long eventId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getEvent(eventId);
+	}
 
 	/**
 	 * Returns the OSGi service identifier.
@@ -45,6 +68,17 @@ public class EventServiceUtil {
 	 */
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static com.liferay.training.monitor.model.Event updateEvent_(
+			long eventId, long userId, String userName,
+			java.util.Date eventDate, String eventType, String ipAddress,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updateEvent_(
+			eventId, userId, userName, eventDate, eventType, ipAddress,
+			serviceContext);
 	}
 
 	public static EventService getService() {

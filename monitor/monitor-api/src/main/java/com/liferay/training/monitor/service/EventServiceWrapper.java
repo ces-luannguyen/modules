@@ -30,6 +30,31 @@ public class EventServiceWrapper
 		_eventService = eventService;
 	}
 
+	@Override
+	public com.liferay.training.monitor.model.Event addEvent(
+			long userId, String userName, java.util.Date eventDate,
+			String eventType, String ipAddress,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _eventService.addEvent(
+			userId, userName, eventDate, eventType, ipAddress, serviceContext);
+	}
+
+	@Override
+	public com.liferay.training.monitor.model.Event deleteEvent(long eventId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _eventService.deleteEvent(eventId);
+	}
+
+	@Override
+	public com.liferay.training.monitor.model.Event getEvent(long eventId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _eventService.getEvent(eventId);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *
@@ -38,6 +63,18 @@ public class EventServiceWrapper
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _eventService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public com.liferay.training.monitor.model.Event updateEvent_(
+			long eventId, long userId, String userName,
+			java.util.Date eventDate, String eventType, String ipAddress,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _eventService.updateEvent_(
+			eventId, userId, userName, eventDate, eventType, ipAddress,
+			serviceContext);
 	}
 
 	@Override
