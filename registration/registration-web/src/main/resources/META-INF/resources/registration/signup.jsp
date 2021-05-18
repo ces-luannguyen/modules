@@ -1,4 +1,61 @@
 <%@ include file="/init.jsp" %>
+<liferay-ui:success key="userAdded" message="user-added-successfully" />
+
+<liferay-ui:error key="serviceErrorDetails">
+     <liferay-ui:message key="error.user-service-error" arguments='<%= SessionErrors.get(liferayPortletRequest, "serviceErrorDetails") %>' />
+</liferay-ui:error>
+<liferay-ui:error key="firstNameEmpty" message="error.firstname-empty" />
+<liferay-ui:error key="firstNameAlphaNumeric" message="error.firstname-alpha-numeric" />
+<liferay-ui:error key="firstNameMax50" message="error.firstname-max50" />
+<liferay-ui:error key="lastNameEmpty" message="error.lastname-empty" />
+<liferay-ui:error key="lastNameAlphaNumeric" message="error.lastname-alpha-numeric" />
+<liferay-ui:error key="lastNameMax50" message="error.lastname-max50" />
+<liferay-ui:error key="emailAddressEmpty" message="error.email-empty" />
+<liferay-ui:error key="emailAddressFormat" message="error.email-wrong-format" />
+<liferay-ui:error key="emailAddressMax255" message="error.email-max255" />
+
+<liferay-ui:error key="userNameEmpty" message="error.username-empty" />
+<liferay-ui:error key="userNameAlphaNumeric" message="error.username-alpha-numeric" />
+<liferay-ui:error key="userNameMax16" message="error.username-max16" />
+<liferay-ui:error key="userNameMin4" message="error.username-min4" />
+<liferay-ui:error key="userNameExist" message="error.username-exist" />
+
+
+
+<liferay-ui:error key="passwordEmpty" message="error.password-empty" />
+<liferay-ui:error key="passwordFormat" message="error.password-format" />
+<liferay-ui:error key="passwordMin6" message="error.password-min6" />
+<liferay-ui:error key="confirmPasswordEmpty" message="error.confirmpassword-empty" />
+<liferay-ui:error key="passwordNotMatch" message="error.password-not-match" />
+<liferay-ui:error key="homePhoneDigit" message="error.homephone-digit" />
+<liferay-ui:error key="homePhone10" message="error.homephone-10-digit" />
+<liferay-ui:error key="mobilePhoneDigit" message="error.mobilephone-digit" />
+<liferay-ui:error key="mobilePhone10" message="error.mobilephone-10-digit" />
+
+<liferay-ui:error key="address1Empty" message="error.address1-empty" />
+<liferay-ui:error key="address1AlphaNumeric" message="error.address1-alpha-numeric" />
+<liferay-ui:error key="address1Max255" message="error.address1-max255" />
+
+<liferay-ui:error key="address2AlphaNumeric" message="error.address2-alpha-numeric" />
+<liferay-ui:error key="address2Max255" message="error.address2-max255" />
+
+<liferay-ui:error key="cityEmpty" message="error.city-empty" />
+<liferay-ui:error key="cityAlphaNumeric" message="error.city-alpha-numeric" />
+<liferay-ui:error key="cityMax255" message="error.city-max255" />
+
+<liferay-ui:error key="stateEmpty" message="error.state-empty" />
+
+<liferay-ui:error key="zipCodeEmpty" message="error.zipcode-empty" />
+<liferay-ui:error key="zipCodeDigit" message="error.zipcode-digit" />
+<liferay-ui:error key="zipCode5" message="error.zipcode-5-digit" />
+
+<liferay-ui:error key="securityQuestionEmpty" message="error.security-question-empty" />
+
+<liferay-ui:error key="answerEmpty" message="error.answer-empty" />
+<liferay-ui:error key="answerAlphaNumeric" message="error.answer-alpha-numeric" />
+<liferay-ui:error key="answerMax255" message="error.answer-max255" />
+
+<liferay-ui:error key="touChecked" message="error.tou-checked" />
 
 <portlet:actionURL name="<%= MVCCommandNames.ADD_USER %>" var="userActionURL">
 	<portlet:param name="redirect" value="${param.redirect}" />

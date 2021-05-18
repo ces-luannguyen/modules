@@ -84,12 +84,17 @@ public class AddUser_MVCActionCommand extends BaseMVCActionCommand {
 
             _userService.addUser_(username, firstName, lastName, emailAddress, male, birthDay, password1, password2, homePhone, mobilePhone, address, address2, city, state, zip, securityQuestion, securityAnswer, acceptedTou, serviceContext);
 
+            // Set the success message.
 
+            SessionMessages.add(actionRequest, "userAdded");
+            
             sendRedirect(actionRequest, actionResponse);
         }
         catch (UserValidationException uve) {
 
-        	uve.printStackTrace();
+        	// Get error messages from the service layer.
+
+        	uve.getErrors().forEach(key -> SessionErrors.add(actionRequest, key));
 
             actionResponse.setRenderParameter(
                 "mvcRenderCommandName", MVCCommandNames.SIGN_UP);            
@@ -98,7 +103,9 @@ public class AddUser_MVCActionCommand extends BaseMVCActionCommand {
         catch (PortalException pe) {
 
 
-        	pe.printStackTrace();
+        	// Set error messages from the service layer.
+
+            SessionErrors.add(actionRequest, "serviceErrorDetails", pe);
 
             actionResponse.setRenderParameter(
                 "mvcRenderCommandName", MVCCommandNames.SIGN_UP);            

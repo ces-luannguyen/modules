@@ -22,11 +22,13 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.training.registration.model.User_;
 import com.liferay.training.registration.service.base.User_LocalServiceBaseImpl;
+import com.liferay.training.registration.validator.UserValidator;
 
 import java.util.Date;
 import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * The implementation of the user_ local service.
@@ -64,6 +66,9 @@ public class User_LocalServiceImpl extends User_LocalServiceBaseImpl {
 		     String answer, boolean termsOfUse, ServiceContext serviceContext)
 		     throws PortalException {
 
+			// Validate user parameters.
+		
+	     	_userValidator.validate(userName, firstName, lastName, emailAddress, birthDay, password, confirmPassword, homePhone, mobilePhone, address1, address2, city, state, zipCode, securityQuestion, answer, termsOfUse);
 
 		     // Generate primary key for the user.
 
@@ -110,6 +115,10 @@ public class User_LocalServiceImpl extends User_LocalServiceBaseImpl {
 		     String answer, boolean termsOfUse, ServiceContext serviceContext)
 		     throws PortalException {
 
+			// Validate user parameters.
+		
+	     	_userValidator.validate(userName, firstName, lastName, emailAddress, birthDay, password, confirmPassword, homePhone, mobilePhone, address1, address2, city, state, zipCode, securityQuestion, answer, termsOfUse);
+		
 		     // Get the Assignment by id.
 
 		     User_ user = getUser_(userId);
@@ -158,4 +167,7 @@ public class User_LocalServiceImpl extends User_LocalServiceBaseImpl {
 
 		throw new UnsupportedOperationException("Not supported.");
 	}
+	
+	@Reference
+	 UserValidator _userValidator;
 }
