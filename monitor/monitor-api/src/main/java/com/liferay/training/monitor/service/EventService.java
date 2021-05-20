@@ -23,9 +23,11 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.training.monitor.model.Event;
 
 import java.util.Date;
+import java.util.List;
 
 import org.osgi.annotation.versioning.ProviderType;
 
@@ -60,7 +62,32 @@ public interface EventService extends BaseService {
 	public Event deleteEvent(long eventId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getAllEvents();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getAllEvents(int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getAllEvents(
+		int start, int end, OrderByComparator<Event> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Event getEvent(long eventId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getEventsByCompanyId(long companyId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getEventsByEventType(String eventType);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getEventsByEventType(
+		String eventType, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getEventsByEventType(
+		String eventType, int start, int end,
+		OrderByComparator<Event> orderByComparator);
 
 	/**
 	 * Returns the OSGi service identifier.

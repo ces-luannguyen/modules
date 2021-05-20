@@ -214,6 +214,243 @@ public class EventServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.liferay.training.monitor.model.Event>
+		getEventsByCompanyId(HttpPrincipal httpPrincipal, long companyId) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				EventServiceUtil.class, "getEventsByCompanyId",
+				_getEventsByCompanyIdParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, companyId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.liferay.training.monitor.model.Event>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.liferay.training.monitor.model.Event>
+		getAllEvents(HttpPrincipal httpPrincipal) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				EventServiceUtil.class, "getAllEvents",
+				_getAllEventsParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.liferay.training.monitor.model.Event>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.liferay.training.monitor.model.Event>
+		getEventsByEventType(HttpPrincipal httpPrincipal, String eventType) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				EventServiceUtil.class, "getEventsByEventType",
+				_getEventsByEventTypeParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, eventType);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.liferay.training.monitor.model.Event>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.liferay.training.monitor.model.Event>
+		getAllEvents(
+			HttpPrincipal httpPrincipal, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.training.monitor.model.Event> orderByComparator) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				EventServiceUtil.class, "getAllEvents",
+				_getAllEventsParameterTypes7);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, start, end, orderByComparator);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.liferay.training.monitor.model.Event>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.liferay.training.monitor.model.Event>
+		getAllEvents(HttpPrincipal httpPrincipal, int start, int end) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				EventServiceUtil.class, "getAllEvents",
+				_getAllEventsParameterTypes8);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, start, end);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.liferay.training.monitor.model.Event>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.liferay.training.monitor.model.Event>
+		getEventsByEventType(
+			HttpPrincipal httpPrincipal, String eventType, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.training.monitor.model.Event> orderByComparator) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				EventServiceUtil.class, "getEventsByEventType",
+				_getEventsByEventTypeParameterTypes9);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, eventType, start, end, orderByComparator);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.liferay.training.monitor.model.Event>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.liferay.training.monitor.model.Event>
+		getEventsByEventType(
+			HttpPrincipal httpPrincipal, String eventType, int start, int end) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				EventServiceUtil.class, "getEventsByEventType",
+				_getEventsByEventTypeParameterTypes10);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, eventType, start, end);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.liferay.training.monitor.model.Event>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(EventServiceHttp.class);
 
 	private static final Class<?>[] _addEventParameterTypes0 = new Class[] {
@@ -231,5 +468,25 @@ public class EventServiceHttp {
 		String.class, String.class,
 		com.liferay.portal.kernel.service.ServiceContext.class
 	};
+	private static final Class<?>[] _getEventsByCompanyIdParameterTypes4 =
+		new Class[] {long.class};
+	private static final Class<?>[] _getAllEventsParameterTypes5 =
+		new Class[] {};
+	private static final Class<?>[] _getEventsByEventTypeParameterTypes6 =
+		new Class[] {String.class};
+	private static final Class<?>[] _getAllEventsParameterTypes7 = new Class[] {
+		int.class, int.class,
+		com.liferay.portal.kernel.util.OrderByComparator.class
+	};
+	private static final Class<?>[] _getAllEventsParameterTypes8 = new Class[] {
+		int.class, int.class
+	};
+	private static final Class<?>[] _getEventsByEventTypeParameterTypes9 =
+		new Class[] {
+			String.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class
+		};
+	private static final Class<?>[] _getEventsByEventTypeParameterTypes10 =
+		new Class[] {String.class, int.class, int.class};
 
 }

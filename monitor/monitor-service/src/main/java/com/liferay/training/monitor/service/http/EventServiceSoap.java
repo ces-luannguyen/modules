@@ -141,6 +141,140 @@ public class EventServiceSoap {
 		}
 	}
 
+	public static com.liferay.training.monitor.model.EventSoap[]
+			getEventsByCompanyId(long companyId)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.training.monitor.model.Event>
+				returnValue = EventServiceUtil.getEventsByCompanyId(companyId);
+
+			return com.liferay.training.monitor.model.EventSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.liferay.training.monitor.model.EventSoap[] getAllEvents()
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.training.monitor.model.Event>
+				returnValue = EventServiceUtil.getAllEvents();
+
+			return com.liferay.training.monitor.model.EventSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.liferay.training.monitor.model.EventSoap[]
+			getEventsByEventType(String eventType)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.training.monitor.model.Event>
+				returnValue = EventServiceUtil.getEventsByEventType(eventType);
+
+			return com.liferay.training.monitor.model.EventSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.liferay.training.monitor.model.EventSoap[] getAllEvents(
+			int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.training.monitor.model.Event> orderByComparator)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.training.monitor.model.Event>
+				returnValue = EventServiceUtil.getAllEvents(
+					start, end, orderByComparator);
+
+			return com.liferay.training.monitor.model.EventSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.liferay.training.monitor.model.EventSoap[] getAllEvents(
+			int start, int end)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.training.monitor.model.Event>
+				returnValue = EventServiceUtil.getAllEvents(start, end);
+
+			return com.liferay.training.monitor.model.EventSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.liferay.training.monitor.model.EventSoap[]
+			getEventsByEventType(
+				String eventType, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.training.monitor.model.Event>
+						orderByComparator)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.training.monitor.model.Event>
+				returnValue = EventServiceUtil.getEventsByEventType(
+					eventType, start, end, orderByComparator);
+
+			return com.liferay.training.monitor.model.EventSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.liferay.training.monitor.model.EventSoap[]
+			getEventsByEventType(String eventType, int start, int end)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.training.monitor.model.Event>
+				returnValue = EventServiceUtil.getEventsByEventType(
+					eventType, start, end);
+
+			return com.liferay.training.monitor.model.EventSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(EventServiceSoap.class);
 
 }

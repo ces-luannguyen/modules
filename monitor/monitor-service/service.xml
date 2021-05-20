@@ -20,6 +20,25 @@
 		<column name="eventType" type="String"></column>
 		<column name="ipAddress" type="String"></column>
 		
+		
+		<!-- Order -->
+
+         <order by="asc">
+             <order-column name="eventDate" />
+         </order>
+
+         <!-- Finders -->
+
+         <!-- Find by companyId -->
+
+         <finder name="CompanyId" return-type="Collection">
+             <finder-column name="companyId"></finder-column>
+         </finder>
+         <!-- Find by eventType -->
+         <finder name="EventType" return-type="Collection">
+             <finder-column name="eventType"></finder-column>
+         </finder>
+         
 	</entity>
 
 	<!-- Exceptions -->

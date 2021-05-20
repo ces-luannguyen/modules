@@ -54,11 +54,60 @@ public class EventServiceUtil {
 		return getService().deleteEvent(eventId);
 	}
 
+	public static java.util.List<com.liferay.training.monitor.model.Event>
+		getAllEvents() {
+
+		return getService().getAllEvents();
+	}
+
+	public static java.util.List<com.liferay.training.monitor.model.Event>
+		getAllEvents(int start, int end) {
+
+		return getService().getAllEvents(start, end);
+	}
+
+	public static java.util.List<com.liferay.training.monitor.model.Event>
+		getAllEvents(
+			int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.training.monitor.model.Event> orderByComparator) {
+
+		return getService().getAllEvents(start, end, orderByComparator);
+	}
+
 	public static com.liferay.training.monitor.model.Event getEvent(
 			long eventId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().getEvent(eventId);
+	}
+
+	public static java.util.List<com.liferay.training.monitor.model.Event>
+		getEventsByCompanyId(long companyId) {
+
+		return getService().getEventsByCompanyId(companyId);
+	}
+
+	public static java.util.List<com.liferay.training.monitor.model.Event>
+		getEventsByEventType(String eventType) {
+
+		return getService().getEventsByEventType(eventType);
+	}
+
+	public static java.util.List<com.liferay.training.monitor.model.Event>
+		getEventsByEventType(String eventType, int start, int end) {
+
+		return getService().getEventsByEventType(eventType, start, end);
+	}
+
+	public static java.util.List<com.liferay.training.monitor.model.Event>
+		getEventsByEventType(
+			String eventType, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.training.monitor.model.Event> orderByComparator) {
+
+		return getService().getEventsByEventType(
+			eventType, start, end, orderByComparator);
 	}
 
 	/**

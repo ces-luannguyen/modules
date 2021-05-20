@@ -217,6 +217,30 @@ public class EventLocalServiceWrapper
 		return _eventLocalService.getActionableDynamicQuery();
 	}
 
+	@Override
+	public java.util.List<com.liferay.training.monitor.model.Event>
+		getAllEvents() {
+
+		return _eventLocalService.getAllEvents();
+	}
+
+	@Override
+	public java.util.List<com.liferay.training.monitor.model.Event>
+		getAllEvents(int start, int end) {
+
+		return _eventLocalService.getAllEvents(start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.training.monitor.model.Event>
+		getAllEvents(
+			int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.training.monitor.model.Event> orderByComparator) {
+
+		return _eventLocalService.getAllEvents(start, end, orderByComparator);
+	}
+
 	/**
 	 * Returns the event with the primary key.
 	 *
@@ -263,6 +287,38 @@ public class EventLocalServiceWrapper
 		int start, int end) {
 
 		return _eventLocalService.getEvents(start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.training.monitor.model.Event>
+		getEventsByCompanyId(long companyId) {
+
+		return _eventLocalService.getEventsByCompanyId(companyId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.training.monitor.model.Event>
+		getEventsByEventType(String eventType) {
+
+		return _eventLocalService.getEventsByEventType(eventType);
+	}
+
+	@Override
+	public java.util.List<com.liferay.training.monitor.model.Event>
+		getEventsByEventType(String eventType, int start, int end) {
+
+		return _eventLocalService.getEventsByEventType(eventType, start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.training.monitor.model.Event>
+		getEventsByEventType(
+			String eventType, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.training.monitor.model.Event> orderByComparator) {
+
+		return _eventLocalService.getEventsByEventType(
+			eventType, start, end, orderByComparator);
 	}
 
 	/**

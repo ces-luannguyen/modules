@@ -194,6 +194,16 @@ public interface EventLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getAllEvents();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getAllEvents(int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getAllEvents(
+		int start, int end, OrderByComparator<Event> orderByComparator);
+
 	/**
 	 * Returns the event with the primary key.
 	 *
@@ -229,6 +239,21 @@ public interface EventLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Event> getEvents(int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getEventsByCompanyId(long companyId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getEventsByEventType(String eventType);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getEventsByEventType(
+		String eventType, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getEventsByEventType(
+		String eventType, int start, int end,
+		OrderByComparator<Event> orderByComparator);
 
 	/**
 	 * Returns the number of events.

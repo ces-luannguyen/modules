@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.impl.BaseModelImpl;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.training.monitor.model.Event;
@@ -96,10 +97,10 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	public static final String TABLE_SQL_DROP = "drop table Monitor_Event";
 
-	public static final String ORDER_BY_JPQL = " ORDER BY event.eventId ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY event.eventDate ASC";
 
 	public static final String ORDER_BY_SQL =
-		" ORDER BY Monitor_Event.eventId ASC";
+		" ORDER BY Monitor_Event.eventDate ASC";
 
 	public static final String DATA_SOURCE = "liferayDataSource";
 
@@ -109,9 +110,11 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	public static final long COMPANYID_COLUMN_BITMASK = 1L;
 
-	public static final long UUID_COLUMN_BITMASK = 2L;
+	public static final long EVENTTYPE_COLUMN_BITMASK = 2L;
 
-	public static final long EVENTID_COLUMN_BITMASK = 4L;
+	public static final long UUID_COLUMN_BITMASK = 4L;
+
+	public static final long EVENTDATE_COLUMN_BITMASK = 8L;
 
 	public static void setEntityCacheEnabled(boolean entityCacheEnabled) {
 		_entityCacheEnabled = entityCacheEnabled;
@@ -429,6 +432,8 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	@Override
 	public void setEventDate(Date eventDate) {
+		_columnBitmask = -1L;
+
 		_eventDate = eventDate;
 	}
 
@@ -445,7 +450,17 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	@Override
 	public void setEventType(String eventType) {
+		_columnBitmask |= EVENTTYPE_COLUMN_BITMASK;
+
+		if (_originalEventType == null) {
+			_originalEventType = _eventType;
+		}
+
 		_eventType = eventType;
+	}
+
+	public String getOriginalEventType() {
+		return GetterUtil.getString(_originalEventType);
 	}
 
 	@JSON
@@ -516,17 +531,15 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	@Override
 	public int compareTo(Event event) {
-		long primaryKey = event.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		value = DateUtil.compareTo(getEventDate(), event.getEventDate());
+
+		if (value != 0) {
+			return value;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
-		}
-		else {
-			return 0;
-		}
+
+		return 0;
 	}
 
 	@Override
@@ -575,6 +588,8 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		eventModelImpl._originalCompanyId = eventModelImpl._companyId;
 
 		eventModelImpl._setOriginalCompanyId = false;
+
+		eventModelImpl._originalEventType = eventModelImpl._eventType;
 
 		eventModelImpl._columnBitmask = 0;
 	}
@@ -714,6 +729,7 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 	private long _userId;
 	private Date _eventDate;
 	private String _eventType;
+	private String _originalEventType;
 	private String _ipAddress;
 	private long _columnBitmask;
 	private Event _escapedModel;

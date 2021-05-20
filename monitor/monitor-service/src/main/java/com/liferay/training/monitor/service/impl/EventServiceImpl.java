@@ -17,10 +17,12 @@ package com.liferay.training.monitor.service.impl;
 import com.liferay.portal.aop.AopService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.training.monitor.service.base.EventServiceBaseImpl;
 import com.liferay.training.monitor.model.Event;
 
 import java.util.Date;
+import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -82,4 +84,38 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 				ipAddress, serviceContext);
 
 	}
+	
+	public List<Event> getEventsByCompanyId(long companyId) {
+
+	     return eventPersistence.findByCompanyId(companyId);
+	 }
+	
+	
+	public List<Event> getAllEvents(){
+		return eventLocalService.getAllEvents();
+	}
+	
+	public List<Event> getEventsByEventType(String eventType){
+		return eventLocalService.getEventsByEventType(eventType);
+	}
+	
+	public List<Event> getAllEvents(int start, int end, OrderByComparator<Event> orderByComparator){
+		
+		return eventLocalService.getAllEvents(start, end, orderByComparator);
+	}
+	
+	public List<Event> getAllEvents(int start, int end){
+		
+		return eventLocalService.getAllEvents(start, end);
+	}
+	
+	public List<Event> getEventsByEventType(String eventType, int start, int end, OrderByComparator<Event> orderByComparator){
+		return eventLocalService.getEventsByEventType(eventType, start, end, orderByComparator);
+	}
+	
+	public List<Event> getEventsByEventType(String eventType, int start, int end){
+		return eventLocalService.getEventsByEventType(eventType, start, end);
+	}
+	
+	
 }

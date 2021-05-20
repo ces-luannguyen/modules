@@ -18,12 +18,14 @@ import com.liferay.portal.aop.AopService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.CompanyLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.training.monitor.model.Event;
 import com.liferay.training.monitor.service.base.EventLocalServiceBaseImpl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -102,8 +104,37 @@ public class EventLocalServiceImpl extends EventLocalServiceBaseImpl {
 		     return event;
 		 }
 	
+	public List<Event> getEventsByCompanyId(long companyId) {
+
+	     return eventPersistence.findByCompanyId(companyId);
+	 }
 	
+	public List<Event> getAllEvents(){
+		
+		return eventPersistence.findAll();
+	}
 	
+	public List<Event> getEventsByEventType(String eventType){
+		return eventPersistence.findByEventType(eventType);
+	}
+	
+	public List<Event> getAllEvents(int start, int end, OrderByComparator<Event> orderByComparator){
+		
+		return eventPersistence.findAll(start, end, orderByComparator);
+	}
+	
+	public List<Event> getAllEvents(int start, int end){
+		
+		return eventPersistence.findAll(start, end);
+	}
+	
+	public List<Event> getEventsByEventType(String eventType, int start, int end, OrderByComparator<Event> orderByComparator){
+		return eventPersistence.findByEventType(eventType, start, end, orderByComparator);
+	}
+	
+	public List<Event> getEventsByEventType(String eventType, int start, int end){
+		return eventPersistence.findByEventType(eventType, start, end);
+	}
 	 
 	@Override
 	public Event addEvent(Event event) {
