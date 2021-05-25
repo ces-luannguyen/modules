@@ -183,6 +183,56 @@ public interface EventPersistence extends BasePersistence<Event> {
 	public int countByUuid(String uuid);
 
 	/**
+	 * Returns the event where uuid = &#63; and groupId = &#63; or throws a <code>NoSuchEventException</code> if it could not be found.
+	 *
+	 * @param uuid the uuid
+	 * @param groupId the group ID
+	 * @return the matching event
+	 * @throws NoSuchEventException if a matching event could not be found
+	 */
+	public Event findByUUID_G(String uuid, long groupId)
+		throws NoSuchEventException;
+
+	/**
+	 * Returns the event where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param uuid the uuid
+	 * @param groupId the group ID
+	 * @return the matching event, or <code>null</code> if a matching event could not be found
+	 */
+	public Event fetchByUUID_G(String uuid, long groupId);
+
+	/**
+	 * Returns the event where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param uuid the uuid
+	 * @param groupId the group ID
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching event, or <code>null</code> if a matching event could not be found
+	 */
+	public Event fetchByUUID_G(
+		String uuid, long groupId, boolean useFinderCache);
+
+	/**
+	 * Removes the event where uuid = &#63; and groupId = &#63; from the database.
+	 *
+	 * @param uuid the uuid
+	 * @param groupId the group ID
+	 * @return the event that was removed
+	 */
+	public Event removeByUUID_G(String uuid, long groupId)
+		throws NoSuchEventException;
+
+	/**
+	 * Returns the number of events where uuid = &#63; and groupId = &#63;.
+	 *
+	 * @param uuid the uuid
+	 * @param groupId the group ID
+	 * @return the number of matching events
+	 */
+	public int countByUUID_G(String uuid, long groupId);
+
+	/**
 	 * Returns all the events where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
@@ -621,6 +671,510 @@ public interface EventPersistence extends BasePersistence<Event> {
 	 * @return the number of matching events
 	 */
 	public int countByEventType(String eventType);
+
+	/**
+	 * Returns all the events where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @return the matching events
+	 */
+	public java.util.List<Event> findByGroupId(long groupId);
+
+	/**
+	 * Returns a range of all the events where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>EventModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of events
+	 * @param end the upper bound of the range of events (not inclusive)
+	 * @return the range of matching events
+	 */
+	public java.util.List<Event> findByGroupId(
+		long groupId, int start, int end);
+
+	/**
+	 * Returns an ordered range of all the events where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>EventModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of events
+	 * @param end the upper bound of the range of events (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching events
+	 */
+	public java.util.List<Event> findByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Event>
+			orderByComparator);
+
+	/**
+	 * Returns an ordered range of all the events where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>EventModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of events
+	 * @param end the upper bound of the range of events (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching events
+	 */
+	public java.util.List<Event> findByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Event>
+			orderByComparator,
+		boolean useFinderCache);
+
+	/**
+	 * Returns the first event in the ordered set where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching event
+	 * @throws NoSuchEventException if a matching event could not be found
+	 */
+	public Event findByGroupId_First(
+			long groupId,
+			com.liferay.portal.kernel.util.OrderByComparator<Event>
+				orderByComparator)
+		throws NoSuchEventException;
+
+	/**
+	 * Returns the first event in the ordered set where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching event, or <code>null</code> if a matching event could not be found
+	 */
+	public Event fetchByGroupId_First(
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator<Event>
+			orderByComparator);
+
+	/**
+	 * Returns the last event in the ordered set where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching event
+	 * @throws NoSuchEventException if a matching event could not be found
+	 */
+	public Event findByGroupId_Last(
+			long groupId,
+			com.liferay.portal.kernel.util.OrderByComparator<Event>
+				orderByComparator)
+		throws NoSuchEventException;
+
+	/**
+	 * Returns the last event in the ordered set where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching event, or <code>null</code> if a matching event could not be found
+	 */
+	public Event fetchByGroupId_Last(
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator<Event>
+			orderByComparator);
+
+	/**
+	 * Returns the events before and after the current event in the ordered set where groupId = &#63;.
+	 *
+	 * @param eventId the primary key of the current event
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next event
+	 * @throws NoSuchEventException if a event with the primary key could not be found
+	 */
+	public Event[] findByGroupId_PrevAndNext(
+			long eventId, long groupId,
+			com.liferay.portal.kernel.util.OrderByComparator<Event>
+				orderByComparator)
+		throws NoSuchEventException;
+
+	/**
+	 * Returns all the events that the user has permission to view where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @return the matching events that the user has permission to view
+	 */
+	public java.util.List<Event> filterFindByGroupId(long groupId);
+
+	/**
+	 * Returns a range of all the events that the user has permission to view where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>EventModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of events
+	 * @param end the upper bound of the range of events (not inclusive)
+	 * @return the range of matching events that the user has permission to view
+	 */
+	public java.util.List<Event> filterFindByGroupId(
+		long groupId, int start, int end);
+
+	/**
+	 * Returns an ordered range of all the events that the user has permissions to view where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>EventModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of events
+	 * @param end the upper bound of the range of events (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching events that the user has permission to view
+	 */
+	public java.util.List<Event> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Event>
+			orderByComparator);
+
+	/**
+	 * Returns the events before and after the current event in the ordered set of events that the user has permission to view where groupId = &#63;.
+	 *
+	 * @param eventId the primary key of the current event
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next event
+	 * @throws NoSuchEventException if a event with the primary key could not be found
+	 */
+	public Event[] filterFindByGroupId_PrevAndNext(
+			long eventId, long groupId,
+			com.liferay.portal.kernel.util.OrderByComparator<Event>
+				orderByComparator)
+		throws NoSuchEventException;
+
+	/**
+	 * Removes all the events where groupId = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 */
+	public void removeByGroupId(long groupId);
+
+	/**
+	 * Returns the number of events where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @return the number of matching events
+	 */
+	public int countByGroupId(long groupId);
+
+	/**
+	 * Returns the number of events that the user has permission to view where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @return the number of matching events that the user has permission to view
+	 */
+	public int filterCountByGroupId(long groupId);
+
+	/**
+	 * Returns all the events where userId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @return the matching events
+	 */
+	public java.util.List<Event> findByUserId(long userId);
+
+	/**
+	 * Returns a range of all the events where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>EventModelImpl</code>.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of events
+	 * @param end the upper bound of the range of events (not inclusive)
+	 * @return the range of matching events
+	 */
+	public java.util.List<Event> findByUserId(long userId, int start, int end);
+
+	/**
+	 * Returns an ordered range of all the events where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>EventModelImpl</code>.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of events
+	 * @param end the upper bound of the range of events (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching events
+	 */
+	public java.util.List<Event> findByUserId(
+		long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Event>
+			orderByComparator);
+
+	/**
+	 * Returns an ordered range of all the events where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>EventModelImpl</code>.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of events
+	 * @param end the upper bound of the range of events (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching events
+	 */
+	public java.util.List<Event> findByUserId(
+		long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Event>
+			orderByComparator,
+		boolean useFinderCache);
+
+	/**
+	 * Returns the first event in the ordered set where userId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching event
+	 * @throws NoSuchEventException if a matching event could not be found
+	 */
+	public Event findByUserId_First(
+			long userId,
+			com.liferay.portal.kernel.util.OrderByComparator<Event>
+				orderByComparator)
+		throws NoSuchEventException;
+
+	/**
+	 * Returns the first event in the ordered set where userId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching event, or <code>null</code> if a matching event could not be found
+	 */
+	public Event fetchByUserId_First(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<Event>
+			orderByComparator);
+
+	/**
+	 * Returns the last event in the ordered set where userId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching event
+	 * @throws NoSuchEventException if a matching event could not be found
+	 */
+	public Event findByUserId_Last(
+			long userId,
+			com.liferay.portal.kernel.util.OrderByComparator<Event>
+				orderByComparator)
+		throws NoSuchEventException;
+
+	/**
+	 * Returns the last event in the ordered set where userId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching event, or <code>null</code> if a matching event could not be found
+	 */
+	public Event fetchByUserId_Last(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<Event>
+			orderByComparator);
+
+	/**
+	 * Returns the events before and after the current event in the ordered set where userId = &#63;.
+	 *
+	 * @param eventId the primary key of the current event
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next event
+	 * @throws NoSuchEventException if a event with the primary key could not be found
+	 */
+	public Event[] findByUserId_PrevAndNext(
+			long eventId, long userId,
+			com.liferay.portal.kernel.util.OrderByComparator<Event>
+				orderByComparator)
+		throws NoSuchEventException;
+
+	/**
+	 * Removes all the events where userId = &#63; from the database.
+	 *
+	 * @param userId the user ID
+	 */
+	public void removeByUserId(long userId);
+
+	/**
+	 * Returns the number of events where userId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @return the number of matching events
+	 */
+	public int countByUserId(long userId);
+
+	/**
+	 * Returns all the events where userId = &#63; and eventType = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param eventType the event type
+	 * @return the matching events
+	 */
+	public java.util.List<Event> findByUserIdAndEventType(
+		long userId, String eventType);
+
+	/**
+	 * Returns a range of all the events where userId = &#63; and eventType = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>EventModelImpl</code>.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param eventType the event type
+	 * @param start the lower bound of the range of events
+	 * @param end the upper bound of the range of events (not inclusive)
+	 * @return the range of matching events
+	 */
+	public java.util.List<Event> findByUserIdAndEventType(
+		long userId, String eventType, int start, int end);
+
+	/**
+	 * Returns an ordered range of all the events where userId = &#63; and eventType = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>EventModelImpl</code>.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param eventType the event type
+	 * @param start the lower bound of the range of events
+	 * @param end the upper bound of the range of events (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching events
+	 */
+	public java.util.List<Event> findByUserIdAndEventType(
+		long userId, String eventType, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Event>
+			orderByComparator);
+
+	/**
+	 * Returns an ordered range of all the events where userId = &#63; and eventType = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>EventModelImpl</code>.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param eventType the event type
+	 * @param start the lower bound of the range of events
+	 * @param end the upper bound of the range of events (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching events
+	 */
+	public java.util.List<Event> findByUserIdAndEventType(
+		long userId, String eventType, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Event>
+			orderByComparator,
+		boolean useFinderCache);
+
+	/**
+	 * Returns the first event in the ordered set where userId = &#63; and eventType = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param eventType the event type
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching event
+	 * @throws NoSuchEventException if a matching event could not be found
+	 */
+	public Event findByUserIdAndEventType_First(
+			long userId, String eventType,
+			com.liferay.portal.kernel.util.OrderByComparator<Event>
+				orderByComparator)
+		throws NoSuchEventException;
+
+	/**
+	 * Returns the first event in the ordered set where userId = &#63; and eventType = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param eventType the event type
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching event, or <code>null</code> if a matching event could not be found
+	 */
+	public Event fetchByUserIdAndEventType_First(
+		long userId, String eventType,
+		com.liferay.portal.kernel.util.OrderByComparator<Event>
+			orderByComparator);
+
+	/**
+	 * Returns the last event in the ordered set where userId = &#63; and eventType = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param eventType the event type
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching event
+	 * @throws NoSuchEventException if a matching event could not be found
+	 */
+	public Event findByUserIdAndEventType_Last(
+			long userId, String eventType,
+			com.liferay.portal.kernel.util.OrderByComparator<Event>
+				orderByComparator)
+		throws NoSuchEventException;
+
+	/**
+	 * Returns the last event in the ordered set where userId = &#63; and eventType = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param eventType the event type
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching event, or <code>null</code> if a matching event could not be found
+	 */
+	public Event fetchByUserIdAndEventType_Last(
+		long userId, String eventType,
+		com.liferay.portal.kernel.util.OrderByComparator<Event>
+			orderByComparator);
+
+	/**
+	 * Returns the events before and after the current event in the ordered set where userId = &#63; and eventType = &#63;.
+	 *
+	 * @param eventId the primary key of the current event
+	 * @param userId the user ID
+	 * @param eventType the event type
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next event
+	 * @throws NoSuchEventException if a event with the primary key could not be found
+	 */
+	public Event[] findByUserIdAndEventType_PrevAndNext(
+			long eventId, long userId, String eventType,
+			com.liferay.portal.kernel.util.OrderByComparator<Event>
+				orderByComparator)
+		throws NoSuchEventException;
+
+	/**
+	 * Removes all the events where userId = &#63; and eventType = &#63; from the database.
+	 *
+	 * @param userId the user ID
+	 * @param eventType the event type
+	 */
+	public void removeByUserIdAndEventType(long userId, String eventType);
+
+	/**
+	 * Returns the number of events where userId = &#63; and eventType = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param eventType the event type
+	 * @return the number of matching events
+	 */
+	public int countByUserIdAndEventType(long userId, String eventType);
 
 	/**
 	 * Caches the event in the entity cache if it is enabled.

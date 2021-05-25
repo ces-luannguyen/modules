@@ -14,12 +14,14 @@
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long"></column>
+		<column name="groupId" type="long"></column>
 		<column name="userName" type="String"></column>
 		<column name="userId" type="long"></column>
 		<column name="eventDate" type="Date"></column>
 		<column name="eventType" type="String"></column>
 		<column name="ipAddress" type="String"></column>
-		
+		<column name="createDate" type="Date"></column>
+         <column name="modifiedDate" type="Date"></column>
 		
 		<!-- Order -->
 
@@ -38,6 +40,19 @@
          <finder name="EventType" return-type="Collection">
              <finder-column name="eventType"></finder-column>
          </finder>
+         <!-- Find by groupId -->
+         <finder name="GroupId" return-type="Collection">
+             <finder-column name="groupId"></finder-column>
+         </finder>
+         <!-- Find by userId -->
+         <finder name="UserId" return-type="Collection">
+             <finder-column name="userId"></finder-column>
+         </finder>
+         <!-- Find by userId and eventType -->
+         <finder name="UserIdAndEventType" return-type="Collection">
+			<finder-column name="userId"></finder-column>
+			<finder-column name="eventType"></finder-column>
+		</finder>
          
 	</entity>
 

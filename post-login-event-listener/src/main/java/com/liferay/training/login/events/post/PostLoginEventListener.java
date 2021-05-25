@@ -5,6 +5,8 @@ import com.liferay.portal.kernel.events.LifecycleAction;
 import com.liferay.portal.kernel.events.LifecycleEvent;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.UserService;
 import com.liferay.training.monitor.service.EventService;
 
@@ -31,19 +33,20 @@ public class PostLoginEventListener implements LifecycleAction {
 			throws ActionException {
 		
 
-		System.out.println("Login");
 
 
 		try {
 			User user = userService.getCurrentUser();
-			
 			long userId = user.getUserId();
 			String userName = user.getScreenName();
 			Date eventDate = user.getLoginDate();
 			String eventType = "Login";
 			String ipAddress = user.getLastLoginIP();
 			
-			_eventService.addEvent(userId, userName, eventDate, eventType, ipAddress, null);
+			ServiceContext serviceContext =
+	                 ServiceContextThreadLocal.getServiceContext();
+			
+			_eventService.addEvent(userId, userName, eventDate, eventType, ipAddress, serviceContext);
 		} catch (PortalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

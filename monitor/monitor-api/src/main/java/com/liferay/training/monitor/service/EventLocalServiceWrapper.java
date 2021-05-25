@@ -53,6 +53,27 @@ public class EventLocalServiceWrapper
 			userId, userName, eventDate, eventType, ipAddress);
 	}
 
+	@Override
+	public int countByEventType(String eventType) {
+		return _eventLocalService.countByEventType(eventType);
+	}
+
+	@Override
+	public int countEventsByEventTypeAndUserId(String eventType, long userId) {
+		return _eventLocalService.countEventsByEventTypeAndUserId(
+			eventType, userId);
+	}
+
+	@Override
+	public int countEventsByGroupId(long groupId) {
+		return _eventLocalService.countEventsByGroupId(groupId);
+	}
+
+	@Override
+	public int countEventsByUserId(long userId) {
+		return _eventLocalService.countEventsByUserId(userId);
+	}
+
 	/**
 	 * Creates a new event with the primary key. Does not add the event to the database.
 	 *
@@ -197,17 +218,17 @@ public class EventLocalServiceWrapper
 	}
 
 	/**
-	 * Returns the event with the matching UUID and company.
+	 * Returns the event matching the UUID and group.
 	 *
 	 * @param uuid the event's UUID
-	 * @param companyId the primary key of the company
+	 * @param groupId the primary key of the group
 	 * @return the matching event, or <code>null</code> if a matching event could not be found
 	 */
 	@Override
-	public com.liferay.training.monitor.model.Event
-		fetchEventByUuidAndCompanyId(String uuid, long companyId) {
+	public com.liferay.training.monitor.model.Event fetchEventByUuidAndGroupId(
+		String uuid, long groupId) {
 
-		return _eventLocalService.fetchEventByUuidAndCompanyId(uuid, companyId);
+		return _eventLocalService.fetchEventByUuidAndGroupId(uuid, groupId);
 	}
 
 	@Override
@@ -241,6 +262,28 @@ public class EventLocalServiceWrapper
 		return _eventLocalService.getAllEvents(start, end, orderByComparator);
 	}
 
+	@Override
+	public java.util.List<com.liferay.training.monitor.model.Event>
+		getAllEvents(
+			long groupId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.training.monitor.model.Event> orderByComparator) {
+
+		return _eventLocalService.getAllEvents(
+			groupId, start, end, orderByComparator);
+	}
+
+	@Override
+	public java.util.List<com.liferay.training.monitor.model.Event>
+		getAllEventsByUserId(
+			long userId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.training.monitor.model.Event> orderByComparator) {
+
+		return _eventLocalService.getAllEventsByUserId(
+			userId, start, end, orderByComparator);
+	}
+
 	/**
 	 * Returns the event with the primary key.
 	 *
@@ -256,19 +299,19 @@ public class EventLocalServiceWrapper
 	}
 
 	/**
-	 * Returns the event with the matching UUID and company.
+	 * Returns the event matching the UUID and group.
 	 *
 	 * @param uuid the event's UUID
-	 * @param companyId the primary key of the company
+	 * @param groupId the primary key of the group
 	 * @return the matching event
 	 * @throws PortalException if a matching event could not be found
 	 */
 	@Override
-	public com.liferay.training.monitor.model.Event getEventByUuidAndCompanyId(
-			String uuid, long companyId)
+	public com.liferay.training.monitor.model.Event getEventByUuidAndGroupId(
+			String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _eventLocalService.getEventByUuidAndCompanyId(uuid, companyId);
+		return _eventLocalService.getEventByUuidAndGroupId(uuid, groupId);
 	}
 
 	/**
@@ -321,6 +364,52 @@ public class EventLocalServiceWrapper
 			eventType, start, end, orderByComparator);
 	}
 
+	@Override
+	public java.util.List<com.liferay.training.monitor.model.Event>
+		getEventsByEventTypeAndUserId(
+			long userId, String eventType, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.training.monitor.model.Event> orderByComparator) {
+
+		return _eventLocalService.getEventsByEventTypeAndUserId(
+			userId, eventType, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns all the events matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the events
+	 * @param companyId the primary key of the company
+	 * @return the matching events, or an empty list if no matches were found
+	 */
+	@Override
+	public java.util.List<com.liferay.training.monitor.model.Event>
+		getEventsByUuidAndCompanyId(String uuid, long companyId) {
+
+		return _eventLocalService.getEventsByUuidAndCompanyId(uuid, companyId);
+	}
+
+	/**
+	 * Returns a range of events matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the events
+	 * @param companyId the primary key of the company
+	 * @param start the lower bound of the range of events
+	 * @param end the upper bound of the range of events (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the range of matching events, or an empty list if no matches were found
+	 */
+	@Override
+	public java.util.List<com.liferay.training.monitor.model.Event>
+		getEventsByUuidAndCompanyId(
+			String uuid, long companyId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.training.monitor.model.Event> orderByComparator) {
+
+		return _eventLocalService.getEventsByUuidAndCompanyId(
+			uuid, companyId, start, end, orderByComparator);
+	}
+
 	/**
 	 * Returns the number of events.
 	 *
@@ -329,6 +418,16 @@ public class EventLocalServiceWrapper
 	@Override
 	public int getEventsCount() {
 		return _eventLocalService.getEventsCount();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery
+		getExportActionableDynamicQuery(
+			com.liferay.exportimport.kernel.lar.PortletDataContext
+				portletDataContext) {
+
+		return _eventLocalService.getExportActionableDynamicQuery(
+			portletDataContext);
 	}
 
 	@Override

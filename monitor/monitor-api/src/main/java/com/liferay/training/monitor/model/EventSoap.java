@@ -34,11 +34,14 @@ public class EventSoap implements Serializable {
 		soapModel.setUuid(model.getUuid());
 		soapModel.setEventId(model.getEventId());
 		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setGroupId(model.getGroupId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setEventDate(model.getEventDate());
 		soapModel.setEventType(model.getEventType());
 		soapModel.setIpAddress(model.getIpAddress());
+		soapModel.setCreateDate(model.getCreateDate());
+		soapModel.setModifiedDate(model.getModifiedDate());
 
 		return soapModel;
 	}
@@ -115,6 +118,14 @@ public class EventSoap implements Serializable {
 		_companyId = companyId;
 	}
 
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
 	public String getUserName() {
 		return _userName;
 	}
@@ -155,13 +166,32 @@ public class EventSoap implements Serializable {
 		_ipAddress = ipAddress;
 	}
 
+	public Date getCreateDate() {
+		return _createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
+	}
+
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		_modifiedDate = modifiedDate;
+	}
+
 	private String _uuid;
 	private long _eventId;
 	private long _companyId;
+	private long _groupId;
 	private String _userName;
 	private long _userId;
 	private Date _eventDate;
 	private String _eventType;
 	private String _ipAddress;
+	private Date _createDate;
+	private Date _modifiedDate;
 
 }

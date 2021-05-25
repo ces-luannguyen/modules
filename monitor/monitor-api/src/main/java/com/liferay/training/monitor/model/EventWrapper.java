@@ -14,6 +14,7 @@
 
 package com.liferay.training.monitor.model;
 
+import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.model.wrapper.BaseModelWrapper;
 
@@ -44,11 +45,14 @@ public class EventWrapper
 		attributes.put("uuid", getUuid());
 		attributes.put("eventId", getEventId());
 		attributes.put("companyId", getCompanyId());
+		attributes.put("groupId", getGroupId());
 		attributes.put("userName", getUserName());
 		attributes.put("userId", getUserId());
 		attributes.put("eventDate", getEventDate());
 		attributes.put("eventType", getEventType());
 		attributes.put("ipAddress", getIpAddress());
+		attributes.put("createDate", getCreateDate());
+		attributes.put("modifiedDate", getModifiedDate());
 
 		return attributes;
 	}
@@ -71,6 +75,12 @@ public class EventWrapper
 
 		if (companyId != null) {
 			setCompanyId(companyId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
 		}
 
 		String userName = (String)attributes.get("userName");
@@ -102,6 +112,18 @@ public class EventWrapper
 		if (ipAddress != null) {
 			setIpAddress(ipAddress);
 		}
+
+		Date createDate = (Date)attributes.get("createDate");
+
+		if (createDate != null) {
+			setCreateDate(createDate);
+		}
+
+		Date modifiedDate = (Date)attributes.get("modifiedDate");
+
+		if (modifiedDate != null) {
+			setModifiedDate(modifiedDate);
+		}
 	}
 
 	/**
@@ -112,6 +134,16 @@ public class EventWrapper
 	@Override
 	public long getCompanyId() {
 		return model.getCompanyId();
+	}
+
+	/**
+	 * Returns the create date of this event.
+	 *
+	 * @return the create date of this event
+	 */
+	@Override
+	public Date getCreateDate() {
+		return model.getCreateDate();
 	}
 
 	/**
@@ -145,6 +177,16 @@ public class EventWrapper
 	}
 
 	/**
+	 * Returns the group ID of this event.
+	 *
+	 * @return the group ID of this event
+	 */
+	@Override
+	public long getGroupId() {
+		return model.getGroupId();
+	}
+
+	/**
 	 * Returns the ip address of this event.
 	 *
 	 * @return the ip address of this event
@@ -152,6 +194,16 @@ public class EventWrapper
 	@Override
 	public String getIpAddress() {
 		return model.getIpAddress();
+	}
+
+	/**
+	 * Returns the modified date of this event.
+	 *
+	 * @return the modified date of this event
+	 */
+	@Override
+	public Date getModifiedDate() {
+		return model.getModifiedDate();
 	}
 
 	/**
@@ -220,6 +272,16 @@ public class EventWrapper
 	}
 
 	/**
+	 * Sets the create date of this event.
+	 *
+	 * @param createDate the create date of this event
+	 */
+	@Override
+	public void setCreateDate(Date createDate) {
+		model.setCreateDate(createDate);
+	}
+
+	/**
 	 * Sets the event date of this event.
 	 *
 	 * @param eventDate the event date of this event
@@ -250,6 +312,16 @@ public class EventWrapper
 	}
 
 	/**
+	 * Sets the group ID of this event.
+	 *
+	 * @param groupId the group ID of this event
+	 */
+	@Override
+	public void setGroupId(long groupId) {
+		model.setGroupId(groupId);
+	}
+
+	/**
 	 * Sets the ip address of this event.
 	 *
 	 * @param ipAddress the ip address of this event
@@ -257,6 +329,16 @@ public class EventWrapper
 	@Override
 	public void setIpAddress(String ipAddress) {
 		model.setIpAddress(ipAddress);
+	}
+
+	/**
+	 * Sets the modified date of this event.
+	 *
+	 * @param modifiedDate the modified date of this event
+	 */
+	@Override
+	public void setModifiedDate(Date modifiedDate) {
+		model.setModifiedDate(modifiedDate);
 	}
 
 	/**
@@ -307,6 +389,11 @@ public class EventWrapper
 	@Override
 	public void setUuid(String uuid) {
 		model.setUuid(uuid);
+	}
+
+	@Override
+	public StagedModelType getStagedModelType() {
+		return model.getStagedModelType();
 	}
 
 	@Override

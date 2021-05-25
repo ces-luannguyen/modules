@@ -14,8 +14,10 @@
 
 package com.liferay.training.monitor.service;
 
+import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -76,6 +78,14 @@ public interface EventLocalService
 			long userId, String userName, Date eventDate, String eventType,
 			String ipAddress)
 		throws PortalException;
+
+	public int countByEventType(String eventType);
+
+	public int countEventsByEventTypeAndUserId(String eventType, long userId);
+
+	public int countEventsByGroupId(long groupId);
+
+	public int countEventsByUserId(long userId);
 
 	/**
 	 * Creates a new event with the primary key. Does not add the event to the database.
@@ -182,14 +192,14 @@ public interface EventLocalService
 	public Event fetchEvent(long eventId);
 
 	/**
-	 * Returns the event with the matching UUID and company.
+	 * Returns the event matching the UUID and group.
 	 *
 	 * @param uuid the event's UUID
-	 * @param companyId the primary key of the company
+	 * @param groupId the primary key of the group
 	 * @return the matching event, or <code>null</code> if a matching event could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Event fetchEventByUuidAndCompanyId(String uuid, long companyId);
+	public Event fetchEventByUuidAndGroupId(String uuid, long groupId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -204,6 +214,16 @@ public interface EventLocalService
 	public List<Event> getAllEvents(
 		int start, int end, OrderByComparator<Event> orderByComparator);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getAllEvents(
+		long groupId, int start, int end,
+		OrderByComparator<Event> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getAllEventsByUserId(
+		long userId, int start, int end,
+		OrderByComparator<Event> orderByComparator);
+
 	/**
 	 * Returns the event with the primary key.
 	 *
@@ -215,15 +235,15 @@ public interface EventLocalService
 	public Event getEvent(long eventId) throws PortalException;
 
 	/**
-	 * Returns the event with the matching UUID and company.
+	 * Returns the event matching the UUID and group.
 	 *
 	 * @param uuid the event's UUID
-	 * @param companyId the primary key of the company
+	 * @param groupId the primary key of the group
 	 * @return the matching event
 	 * @throws PortalException if a matching event could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Event getEventByUuidAndCompanyId(String uuid, long companyId)
+	public Event getEventByUuidAndGroupId(String uuid, long groupId)
 		throws PortalException;
 
 	/**
@@ -255,6 +275,36 @@ public interface EventLocalService
 		String eventType, int start, int end,
 		OrderByComparator<Event> orderByComparator);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getEventsByEventTypeAndUserId(
+		long userId, String eventType, int start, int end,
+		OrderByComparator<Event> orderByComparator);
+
+	/**
+	 * Returns all the events matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the events
+	 * @param companyId the primary key of the company
+	 * @return the matching events, or an empty list if no matches were found
+	 */
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getEventsByUuidAndCompanyId(String uuid, long companyId);
+
+	/**
+	 * Returns a range of events matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the events
+	 * @param companyId the primary key of the company
+	 * @param start the lower bound of the range of events
+	 * @param end the upper bound of the range of events (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the range of matching events, or an empty list if no matches were found
+	 */
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getEventsByUuidAndCompanyId(
+		String uuid, long companyId, int start, int end,
+		OrderByComparator<Event> orderByComparator);
+
 	/**
 	 * Returns the number of events.
 	 *
@@ -262,6 +312,10 @@ public interface EventLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getEventsCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
+		PortletDataContext portletDataContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();

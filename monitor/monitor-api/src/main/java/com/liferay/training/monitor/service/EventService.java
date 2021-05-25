@@ -59,6 +59,14 @@ public interface EventService extends BaseService {
 			String ipAddress, ServiceContext serviceContext)
 		throws PortalException;
 
+	public int countEventsByEventType(String eventType);
+
+	public int countEventsByEventTypeAndUserId(String eventType, long userId);
+
+	public int countEventsByGroupId(long groupId);
+
+	public int countEventsByUserId(long userId);
+
 	public Event deleteEvent(long eventId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -70,6 +78,16 @@ public interface EventService extends BaseService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Event> getAllEvents(
 		int start, int end, OrderByComparator<Event> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getAllEvents(
+		long groupId, int start, int end,
+		OrderByComparator<Event> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getAllEventsByUserId(
+		long userId, int start, int end,
+		OrderByComparator<Event> orderByComparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Event getEvent(long eventId) throws PortalException;
@@ -87,6 +105,11 @@ public interface EventService extends BaseService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Event> getEventsByEventType(
 		String eventType, int start, int end,
+		OrderByComparator<Event> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Event> getEventsByEventTypeAndUserId(
+		long userId, String eventType, int start, int end,
 		OrderByComparator<Event> orderByComparator);
 
 	/**

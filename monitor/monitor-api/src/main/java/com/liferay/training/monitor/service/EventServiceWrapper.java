@@ -42,6 +42,26 @@ public class EventServiceWrapper
 	}
 
 	@Override
+	public int countEventsByEventType(String eventType) {
+		return _eventService.countEventsByEventType(eventType);
+	}
+
+	@Override
+	public int countEventsByEventTypeAndUserId(String eventType, long userId) {
+		return _eventService.countEventsByEventTypeAndUserId(eventType, userId);
+	}
+
+	@Override
+	public int countEventsByGroupId(long groupId) {
+		return _eventService.countEventsByGroupId(groupId);
+	}
+
+	@Override
+	public int countEventsByUserId(long userId) {
+		return _eventService.countEventsByUserId(userId);
+	}
+
+	@Override
 	public com.liferay.training.monitor.model.Event deleteEvent(long eventId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
@@ -70,6 +90,28 @@ public class EventServiceWrapper
 				<com.liferay.training.monitor.model.Event> orderByComparator) {
 
 		return _eventService.getAllEvents(start, end, orderByComparator);
+	}
+
+	@Override
+	public java.util.List<com.liferay.training.monitor.model.Event>
+		getAllEvents(
+			long groupId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.training.monitor.model.Event> orderByComparator) {
+
+		return _eventService.getAllEvents(
+			groupId, start, end, orderByComparator);
+	}
+
+	@Override
+	public java.util.List<com.liferay.training.monitor.model.Event>
+		getAllEventsByUserId(
+			long userId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.training.monitor.model.Event> orderByComparator) {
+
+		return _eventService.getAllEventsByUserId(
+			userId, start, end, orderByComparator);
 	}
 
 	@Override
@@ -109,6 +151,17 @@ public class EventServiceWrapper
 
 		return _eventService.getEventsByEventType(
 			eventType, start, end, orderByComparator);
+	}
+
+	@Override
+	public java.util.List<com.liferay.training.monitor.model.Event>
+		getEventsByEventTypeAndUserId(
+			long userId, String eventType, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.training.monitor.model.Event> orderByComparator) {
+
+		return _eventService.getEventsByEventTypeAndUserId(
+			userId, eventType, start, end, orderByComparator);
 	}
 
 	/**

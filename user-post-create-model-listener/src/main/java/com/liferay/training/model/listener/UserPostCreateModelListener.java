@@ -31,7 +31,6 @@ public class UserPostCreateModelListener extends BaseModelListener<User_> {
 	public void onAfterCreate(User_ model) throws ModelListenerException {
 		// TODO Auto-generated method stub
 		
-		System.out.println("Create");
 		
 		long userId = model.getUserId();
 		String userName = model.getUserName();

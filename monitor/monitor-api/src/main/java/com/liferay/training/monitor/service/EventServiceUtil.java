@@ -47,6 +47,24 @@ public class EventServiceUtil {
 			userId, userName, eventDate, eventType, ipAddress, serviceContext);
 	}
 
+	public static int countEventsByEventType(String eventType) {
+		return getService().countEventsByEventType(eventType);
+	}
+
+	public static int countEventsByEventTypeAndUserId(
+		String eventType, long userId) {
+
+		return getService().countEventsByEventTypeAndUserId(eventType, userId);
+	}
+
+	public static int countEventsByGroupId(long groupId) {
+		return getService().countEventsByGroupId(groupId);
+	}
+
+	public static int countEventsByUserId(long userId) {
+		return getService().countEventsByUserId(userId);
+	}
+
 	public static com.liferay.training.monitor.model.Event deleteEvent(
 			long eventId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -73,6 +91,26 @@ public class EventServiceUtil {
 				<com.liferay.training.monitor.model.Event> orderByComparator) {
 
 		return getService().getAllEvents(start, end, orderByComparator);
+	}
+
+	public static java.util.List<com.liferay.training.monitor.model.Event>
+		getAllEvents(
+			long groupId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.training.monitor.model.Event> orderByComparator) {
+
+		return getService().getAllEvents(
+			groupId, start, end, orderByComparator);
+	}
+
+	public static java.util.List<com.liferay.training.monitor.model.Event>
+		getAllEventsByUserId(
+			long userId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.training.monitor.model.Event> orderByComparator) {
+
+		return getService().getAllEventsByUserId(
+			userId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.training.monitor.model.Event getEvent(
@@ -108,6 +146,16 @@ public class EventServiceUtil {
 
 		return getService().getEventsByEventType(
 			eventType, start, end, orderByComparator);
+	}
+
+	public static java.util.List<com.liferay.training.monitor.model.Event>
+		getEventsByEventTypeAndUserId(
+			long userId, String eventType, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.training.monitor.model.Event> orderByComparator) {
+
+		return getService().getEventsByEventTypeAndUserId(
+			userId, eventType, start, end, orderByComparator);
 	}
 
 	/**

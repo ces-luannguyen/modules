@@ -16,15 +16,24 @@ package com.liferay.training.monitor.service.impl;
 
 import com.liferay.portal.aop.AopService;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.auth.PrincipalException;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.training.monitor.service.base.EventServiceBaseImpl;
+import com.liferay.training.monitor.constants.MonitorConstants;
 import com.liferay.training.monitor.model.Event;
+import com.liferay.training.monitor.service.base.EventServiceBaseImpl;
 
 import java.util.Date;
 import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferencePolicy;
+import org.osgi.service.component.annotations.ReferencePolicyOption;
 
 /**
  * The implementation of the event remote service.
@@ -56,7 +65,11 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	public Event addEvent(
 			long userId, String userName, Date eventDate, String eventType, String ipAddress,
 			ServiceContext serviceContext) throws PortalException {
+		// Check permissions.
 
+//        _portletResourcePermission.check(
+//            getPermissionChecker(), serviceContext.getScopeGroupId(),
+//            ActionKeys.ADD_ENTRY);
 		return eventLocalService.addEvent(userId, userName, eventDate, eventType, ipAddress);
 	}
 
@@ -92,6 +105,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	
 	
 	public List<Event> getAllEvents(){
+		
 		return eventLocalService.getAllEvents();
 	}
 	
@@ -104,18 +118,64 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		return eventLocalService.getAllEvents(start, end, orderByComparator);
 	}
 	
+	public List<Event> getAllEventsByUserId(long userId, int start, int end, OrderByComparator<Event> orderByComparator){
+		
+		return eventLocalService.getAllEventsByUserId(userId, start, end, orderByComparator);
+	}
+	
+	public int countEventsByGroupId(long groupId) {
+		return eventLocalService.countEventsByGroupId(groupId);
+	}
+	
+	public int countEventsByEventType(String eventType) {
+		return eventLocalService.countByEventType(eventType);
+	}
+	
+	public int countEventsByUserId(long userId) {
+		return eventLocalService.countEventsByUserId(userId);
+	}
+	
+	public int countEventsByEventTypeAndUserId(String eventType, long userId) {
+		return eventLocalService.countEventsByEventTypeAndUserId(eventType, userId);
+	}
+	
+	public List<Event> getAllEvents(long groupId, int start, int end, OrderByComparator<Event> orderByComparator){
+		
+		return eventLocalService.getAllEvents(groupId, start, end, orderByComparator);
+	}
+	
+	
 	public List<Event> getAllEvents(int start, int end){
 		
 		return eventLocalService.getAllEvents(start, end);
 	}
 	
 	public List<Event> getEventsByEventType(String eventType, int start, int end, OrderByComparator<Event> orderByComparator){
+		
 		return eventLocalService.getEventsByEventType(eventType, start, end, orderByComparator);
+	}
+	
+	public List<Event> getEventsByEventTypeAndUserId(long userId, String eventType, int start, int end, OrderByComparator<Event> orderByComparator){
+		
+		return eventLocalService.getEventsByEventTypeAndUserId(userId, eventType, start, end, orderByComparator);
 	}
 	
 	public List<Event> getEventsByEventType(String eventType, int start, int end){
 		return eventLocalService.getEventsByEventType(eventType, start, end);
 	}
 	
-	
+	@Reference(
+	        policy = ReferencePolicy.DYNAMIC,
+	        policyOption = ReferencePolicyOption.GREEDY,
+	        target = "(model.class.name=com.liferay.training.monitor.model.Event)"
+	    )
+	    private volatile ModelResourcePermission<Event>
+	        _eventModelResourcePermission;
+
+	    @Reference(
+	        policy = ReferencePolicy.DYNAMIC,
+	        policyOption = ReferencePolicyOption.GREEDY,
+	        target = "(resource.name=" + MonitorConstants.RESOURCE_NAME + ")"
+	    )
+	    private volatile PortletResourcePermission _portletResourcePermission;
 }

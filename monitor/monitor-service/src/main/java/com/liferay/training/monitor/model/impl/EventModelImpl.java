@@ -16,6 +16,7 @@ package com.liferay.training.monitor.model.impl;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.expando.kernel.util.ExpandoBridgeFactoryUtil;
+import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -28,6 +29,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.training.monitor.model.Event;
 import com.liferay.training.monitor.model.EventModel;
@@ -73,9 +75,11 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	public static final Object[][] TABLE_COLUMNS = {
 		{"uuid_", Types.VARCHAR}, {"eventId", Types.BIGINT},
-		{"companyId", Types.BIGINT}, {"userName", Types.VARCHAR},
-		{"userId", Types.BIGINT}, {"eventDate", Types.TIMESTAMP},
-		{"eventType", Types.VARCHAR}, {"ipAddress", Types.VARCHAR}
+		{"companyId", Types.BIGINT}, {"groupId", Types.BIGINT},
+		{"userName", Types.VARCHAR}, {"userId", Types.BIGINT},
+		{"eventDate", Types.TIMESTAMP}, {"eventType", Types.VARCHAR},
+		{"ipAddress", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -85,15 +89,18 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("eventId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("eventDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("eventType", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("ipAddress", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table Monitor_Event (uuid_ VARCHAR(75) null,eventId LONG not null primary key,companyId LONG,userName VARCHAR(75) null,userId LONG,eventDate DATE null,eventType VARCHAR(75) null,ipAddress VARCHAR(75) null)";
+		"create table Monitor_Event (uuid_ VARCHAR(75) null,eventId LONG not null primary key,companyId LONG,groupId LONG,userName VARCHAR(75) null,userId LONG,eventDate DATE null,eventType VARCHAR(75) null,ipAddress VARCHAR(75) null,createDate DATE null,modifiedDate DATE null)";
 
 	public static final String TABLE_SQL_DROP = "drop table Monitor_Event";
 
@@ -112,9 +119,13 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	public static final long EVENTTYPE_COLUMN_BITMASK = 2L;
 
-	public static final long UUID_COLUMN_BITMASK = 4L;
+	public static final long GROUPID_COLUMN_BITMASK = 4L;
 
-	public static final long EVENTDATE_COLUMN_BITMASK = 8L;
+	public static final long USERID_COLUMN_BITMASK = 8L;
+
+	public static final long UUID_COLUMN_BITMASK = 16L;
+
+	public static final long EVENTDATE_COLUMN_BITMASK = 32L;
 
 	public static void setEntityCacheEnabled(boolean entityCacheEnabled) {
 		_entityCacheEnabled = entityCacheEnabled;
@@ -140,11 +151,14 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		model.setUuid(soapModel.getUuid());
 		model.setEventId(soapModel.getEventId());
 		model.setCompanyId(soapModel.getCompanyId());
+		model.setGroupId(soapModel.getGroupId());
 		model.setUserName(soapModel.getUserName());
 		model.setUserId(soapModel.getUserId());
 		model.setEventDate(soapModel.getEventDate());
 		model.setEventType(soapModel.getEventType());
 		model.setIpAddress(soapModel.getIpAddress());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
 
 		return model;
 	}
@@ -299,6 +313,9 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		attributeGetterFunctions.put("companyId", Event::getCompanyId);
 		attributeSetterBiConsumers.put(
 			"companyId", (BiConsumer<Event, Long>)Event::setCompanyId);
+		attributeGetterFunctions.put("groupId", Event::getGroupId);
+		attributeSetterBiConsumers.put(
+			"groupId", (BiConsumer<Event, Long>)Event::setGroupId);
 		attributeGetterFunctions.put("userName", Event::getUserName);
 		attributeSetterBiConsumers.put(
 			"userName", (BiConsumer<Event, String>)Event::setUserName);
@@ -314,6 +331,12 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		attributeGetterFunctions.put("ipAddress", Event::getIpAddress);
 		attributeSetterBiConsumers.put(
 			"ipAddress", (BiConsumer<Event, String>)Event::setIpAddress);
+		attributeGetterFunctions.put("createDate", Event::getCreateDate);
+		attributeSetterBiConsumers.put(
+			"createDate", (BiConsumer<Event, Date>)Event::setCreateDate);
+		attributeGetterFunctions.put("modifiedDate", Event::getModifiedDate);
+		attributeSetterBiConsumers.put(
+			"modifiedDate", (BiConsumer<Event, Date>)Event::setModifiedDate);
 
 		_attributeGetterFunctions = Collections.unmodifiableMap(
 			attributeGetterFunctions);
@@ -383,6 +406,29 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	@JSON
 	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_columnBitmask |= GROUPID_COLUMN_BITMASK;
+
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
+		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
+	}
+
+	@JSON
+	@Override
 	public String getUserName() {
 		if (_userName == null) {
 			return "";
@@ -405,6 +451,14 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	@Override
 	public void setUserId(long userId) {
+		_columnBitmask |= USERID_COLUMN_BITMASK;
+
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -422,6 +476,10 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	@Override
 	public void setUserUuid(String userUuid) {
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	@JSON
@@ -479,6 +537,40 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		_ipAddress = ipAddress;
 	}
 
+	@JSON
+	@Override
+	public Date getCreateDate() {
+		return _createDate;
+	}
+
+	@Override
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
+	}
+
+	@JSON
+	@Override
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	public boolean hasSetModifiedDate() {
+		return _setModifiedDate;
+	}
+
+	@Override
+	public void setModifiedDate(Date modifiedDate) {
+		_setModifiedDate = true;
+
+		_modifiedDate = modifiedDate;
+	}
+
+	@Override
+	public StagedModelType getStagedModelType() {
+		return new StagedModelType(
+			PortalUtil.getClassNameId(Event.class.getName()));
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -518,11 +610,14 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		eventImpl.setUuid(getUuid());
 		eventImpl.setEventId(getEventId());
 		eventImpl.setCompanyId(getCompanyId());
+		eventImpl.setGroupId(getGroupId());
 		eventImpl.setUserName(getUserName());
 		eventImpl.setUserId(getUserId());
 		eventImpl.setEventDate(getEventDate());
 		eventImpl.setEventType(getEventType());
 		eventImpl.setIpAddress(getIpAddress());
+		eventImpl.setCreateDate(getCreateDate());
+		eventImpl.setModifiedDate(getModifiedDate());
 
 		eventImpl.resetOriginalValues();
 
@@ -589,7 +684,17 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 		eventModelImpl._setOriginalCompanyId = false;
 
+		eventModelImpl._originalGroupId = eventModelImpl._groupId;
+
+		eventModelImpl._setOriginalGroupId = false;
+
+		eventModelImpl._originalUserId = eventModelImpl._userId;
+
+		eventModelImpl._setOriginalUserId = false;
+
 		eventModelImpl._originalEventType = eventModelImpl._eventType;
+
+		eventModelImpl._setModifiedDate = false;
 
 		eventModelImpl._columnBitmask = 0;
 	}
@@ -609,6 +714,8 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		eventCacheModel.eventId = getEventId();
 
 		eventCacheModel.companyId = getCompanyId();
+
+		eventCacheModel.groupId = getGroupId();
 
 		eventCacheModel.userName = getUserName();
 
@@ -643,6 +750,24 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 		if ((ipAddress != null) && (ipAddress.length() == 0)) {
 			eventCacheModel.ipAddress = null;
+		}
+
+		Date createDate = getCreateDate();
+
+		if (createDate != null) {
+			eventCacheModel.createDate = createDate.getTime();
+		}
+		else {
+			eventCacheModel.createDate = Long.MIN_VALUE;
+		}
+
+		Date modifiedDate = getModifiedDate();
+
+		if (modifiedDate != null) {
+			eventCacheModel.modifiedDate = modifiedDate.getTime();
+		}
+		else {
+			eventCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
 		return eventCacheModel;
@@ -725,12 +850,20 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
+	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private String _userName;
 	private long _userId;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private Date _eventDate;
 	private String _eventType;
 	private String _originalEventType;
 	private String _ipAddress;
+	private Date _createDate;
+	private Date _modifiedDate;
+	private boolean _setModifiedDate;
 	private long _columnBitmask;
 	private Event _escapedModel;
 

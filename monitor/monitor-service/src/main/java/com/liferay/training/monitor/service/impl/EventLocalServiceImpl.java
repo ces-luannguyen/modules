@@ -18,6 +18,7 @@ import com.liferay.portal.aop.AopService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.CompanyLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
@@ -76,9 +77,26 @@ public class EventLocalServiceImpl extends EventLocalServiceBaseImpl {
 		     event.setUserName(userName);
 		     event.setIpAddress(ipAddress);
 		     
+		     ServiceContext serviceContext =
+	                 ServiceContextThreadLocal.getServiceContext();
+		     event.setGroupId(serviceContext.getScopeGroupId());
+		     
 		     // Persist event to database.
 
-		     return super.addEvent(event);
+		     event = super.addEvent(event);
+
+		     // Add permission resources.
+
+//		     boolean portletActions = false;
+//		     boolean addGroupPermissions = true;
+//		     boolean addGuestPermissions = true;
+//
+//		     resourceLocalService.addResources(
+//		         event.getCompanyId(), event.getGroupId(), userId, Event.class.getName(),
+//		         event.getEventId(), portletActions, addGroupPermissions,
+//		         addGuestPermissions);
+
+		     return event;
 		 }
 	
 	public Event updateEvent(
@@ -123,6 +141,30 @@ public class EventLocalServiceImpl extends EventLocalServiceBaseImpl {
 		return eventPersistence.findAll(start, end, orderByComparator);
 	}
 	
+	public int countEventsByGroupId(long groupId) {
+		return eventPersistence.countByGroupId(groupId);
+	}
+	public int countByEventType(String eventType) {
+		return eventPersistence.countByEventType(eventType);
+	}
+	public int countEventsByUserId(long userId) {
+		return eventPersistence.countByUserId(userId);
+	}
+	
+	public int countEventsByEventTypeAndUserId(String eventType, long userId) {
+		return eventPersistence.countByUserIdAndEventType(userId, eventType);
+	}
+	
+	public List<Event> getAllEvents(long groupId, int start, int end, OrderByComparator<Event> orderByComparator){
+		
+		return eventPersistence.findByGroupId(groupId, start, end, orderByComparator);
+	}
+	
+	public List<Event> getAllEventsByUserId(long userId, int start, int end, OrderByComparator<Event> orderByComparator){
+		
+		return eventPersistence.findByUserId(userId, start, end, orderByComparator);
+	}
+	
 	public List<Event> getAllEvents(int start, int end){
 		
 		return eventPersistence.findAll(start, end);
@@ -130,6 +172,10 @@ public class EventLocalServiceImpl extends EventLocalServiceBaseImpl {
 	
 	public List<Event> getEventsByEventType(String eventType, int start, int end, OrderByComparator<Event> orderByComparator){
 		return eventPersistence.findByEventType(eventType, start, end, orderByComparator);
+	}
+	
+	public List<Event> getEventsByEventTypeAndUserId(long userId, String eventType, int start, int end, OrderByComparator<Event> orderByComparator){
+		return eventPersistence.findByUserIdAndEventType(userId, eventType, start, end, orderByComparator);
 	}
 	
 	public List<Event> getEventsByEventType(String eventType, int start, int end){

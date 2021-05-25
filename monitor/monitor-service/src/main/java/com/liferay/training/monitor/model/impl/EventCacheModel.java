@@ -60,7 +60,7 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -68,6 +68,8 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		sb.append(eventId);
 		sb.append(", companyId=");
 		sb.append(companyId);
+		sb.append(", groupId=");
+		sb.append(groupId);
 		sb.append(", userName=");
 		sb.append(userName);
 		sb.append(", userId=");
@@ -78,6 +80,10 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		sb.append(eventType);
 		sb.append(", ipAddress=");
 		sb.append(ipAddress);
+		sb.append(", createDate=");
+		sb.append(createDate);
+		sb.append(", modifiedDate=");
+		sb.append(modifiedDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -96,6 +102,7 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 
 		eventImpl.setEventId(eventId);
 		eventImpl.setCompanyId(companyId);
+		eventImpl.setGroupId(groupId);
 
 		if (userName == null) {
 			eventImpl.setUserName("");
@@ -127,6 +134,20 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 			eventImpl.setIpAddress(ipAddress);
 		}
 
+		if (createDate == Long.MIN_VALUE) {
+			eventImpl.setCreateDate(null);
+		}
+		else {
+			eventImpl.setCreateDate(new Date(createDate));
+		}
+
+		if (modifiedDate == Long.MIN_VALUE) {
+			eventImpl.setModifiedDate(null);
+		}
+		else {
+			eventImpl.setModifiedDate(new Date(modifiedDate));
+		}
+
 		eventImpl.resetOriginalValues();
 
 		return eventImpl;
@@ -139,12 +160,16 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		eventId = objectInput.readLong();
 
 		companyId = objectInput.readLong();
+
+		groupId = objectInput.readLong();
 		userName = objectInput.readUTF();
 
 		userId = objectInput.readLong();
 		eventDate = objectInput.readLong();
 		eventType = objectInput.readUTF();
 		ipAddress = objectInput.readUTF();
+		createDate = objectInput.readLong();
+		modifiedDate = objectInput.readLong();
 	}
 
 	@Override
@@ -159,6 +184,8 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		objectOutput.writeLong(eventId);
 
 		objectOutput.writeLong(companyId);
+
+		objectOutput.writeLong(groupId);
 
 		if (userName == null) {
 			objectOutput.writeUTF("");
@@ -183,15 +210,21 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		else {
 			objectOutput.writeUTF(ipAddress);
 		}
+
+		objectOutput.writeLong(createDate);
+		objectOutput.writeLong(modifiedDate);
 	}
 
 	public String uuid;
 	public long eventId;
 	public long companyId;
+	public long groupId;
 	public String userName;
 	public long userId;
 	public long eventDate;
 	public String eventType;
 	public String ipAddress;
+	public long createDate;
+	public long modifiedDate;
 
 }

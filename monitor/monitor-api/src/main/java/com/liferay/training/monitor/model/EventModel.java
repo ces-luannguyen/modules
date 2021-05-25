@@ -16,7 +16,9 @@ package com.liferay.training.monitor.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
+import com.liferay.portal.kernel.model.GroupedModel;
 import com.liferay.portal.kernel.model.ShardedModel;
+import com.liferay.portal.kernel.model.StagedAuditedModel;
 
 import java.util.Date;
 
@@ -34,7 +36,8 @@ import org.osgi.annotation.versioning.ProviderType;
  * @generated
  */
 @ProviderType
-public interface EventModel extends BaseModel<Event>, ShardedModel {
+public interface EventModel
+	extends BaseModel<Event>, GroupedModel, ShardedModel, StagedAuditedModel {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -62,6 +65,7 @@ public interface EventModel extends BaseModel<Event>, ShardedModel {
 	 * @return the uuid of this event
 	 */
 	@AutoEscape
+	@Override
 	public String getUuid();
 
 	/**
@@ -69,6 +73,7 @@ public interface EventModel extends BaseModel<Event>, ShardedModel {
 	 *
 	 * @param uuid the uuid of this event
 	 */
+	@Override
 	public void setUuid(String uuid);
 
 	/**
@@ -102,11 +107,28 @@ public interface EventModel extends BaseModel<Event>, ShardedModel {
 	public void setCompanyId(long companyId);
 
 	/**
+	 * Returns the group ID of this event.
+	 *
+	 * @return the group ID of this event
+	 */
+	@Override
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this event.
+	 *
+	 * @param groupId the group ID of this event
+	 */
+	@Override
+	public void setGroupId(long groupId);
+
+	/**
 	 * Returns the user name of this event.
 	 *
 	 * @return the user name of this event
 	 */
 	@AutoEscape
+	@Override
 	public String getUserName();
 
 	/**
@@ -114,6 +136,7 @@ public interface EventModel extends BaseModel<Event>, ShardedModel {
 	 *
 	 * @param userName the user name of this event
 	 */
+	@Override
 	public void setUserName(String userName);
 
 	/**
@@ -121,6 +144,7 @@ public interface EventModel extends BaseModel<Event>, ShardedModel {
 	 *
 	 * @return the user ID of this event
 	 */
+	@Override
 	public long getUserId();
 
 	/**
@@ -128,6 +152,7 @@ public interface EventModel extends BaseModel<Event>, ShardedModel {
 	 *
 	 * @param userId the user ID of this event
 	 */
+	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -135,6 +160,7 @@ public interface EventModel extends BaseModel<Event>, ShardedModel {
 	 *
 	 * @return the user uuid of this event
 	 */
+	@Override
 	public String getUserUuid();
 
 	/**
@@ -142,6 +168,7 @@ public interface EventModel extends BaseModel<Event>, ShardedModel {
 	 *
 	 * @param userUuid the user uuid of this event
 	 */
+	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -187,5 +214,37 @@ public interface EventModel extends BaseModel<Event>, ShardedModel {
 	 * @param ipAddress the ip address of this event
 	 */
 	public void setIpAddress(String ipAddress);
+
+	/**
+	 * Returns the create date of this event.
+	 *
+	 * @return the create date of this event
+	 */
+	@Override
+	public Date getCreateDate();
+
+	/**
+	 * Sets the create date of this event.
+	 *
+	 * @param createDate the create date of this event
+	 */
+	@Override
+	public void setCreateDate(Date createDate);
+
+	/**
+	 * Returns the modified date of this event.
+	 *
+	 * @return the modified date of this event
+	 */
+	@Override
+	public Date getModifiedDate();
+
+	/**
+	 * Sets the modified date of this event.
+	 *
+	 * @param modifiedDate the modified date of this event
+	 */
+	@Override
+	public void setModifiedDate(Date modifiedDate);
 
 }
