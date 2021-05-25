@@ -85,16 +85,7 @@ public class EventLocalServiceImpl extends EventLocalServiceBaseImpl {
 
 		     event = super.addEvent(event);
 
-		     // Add permission resources.
 
-//		     boolean portletActions = false;
-//		     boolean addGroupPermissions = true;
-//		     boolean addGuestPermissions = true;
-//
-//		     resourceLocalService.addResources(
-//		         event.getCompanyId(), event.getGroupId(), userId, Event.class.getName(),
-//		         event.getEventId(), portletActions, addGroupPermissions,
-//		         addGuestPermissions);
 
 		     return event;
 		 }

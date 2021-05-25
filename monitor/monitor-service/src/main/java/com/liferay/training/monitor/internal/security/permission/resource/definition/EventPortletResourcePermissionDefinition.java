@@ -13,29 +13,28 @@ import org.osgi.service.component.annotations.Reference;
  * @author liferay
  */
 @Component(
-    immediate = true, 
-    service = PortletResourcePermissionDefinition.class
+	immediate = true, service = PortletResourcePermissionDefinition.class
 )
 public class EventPortletResourcePermissionDefinition
-    implements PortletResourcePermissionDefinition {
+	implements PortletResourcePermissionDefinition {
 
-    @Override
-    public PortletResourcePermissionLogic[] getPortletResourcePermissionLogics() {
+	@Override
+	public PortletResourcePermissionLogic[]
+		getPortletResourcePermissionLogics() {
 
-        return new PortletResourcePermissionLogic[] {
-            new StagedPortletPermissionLogic(
-                _stagingPermission,
-                "com_liferay_training_monitor_web_AmfEventMonitorPortlet")
-        };
-    }
+		return new PortletResourcePermissionLogic[] {
+			new StagedPortletPermissionLogic(
+				_stagingPermission,
+				"com_liferay_training_monitor_web_AmfEventMonitorPortlet")
+		};
+	}
 
-    @Override
-    public String getResourceName() {
+	@Override
+	public String getResourceName() {
+		return MonitorConstants.RESOURCE_NAME;
+	}
 
-        return MonitorConstants.RESOURCE_NAME;
-    }
-
-    @Reference
-    private StagingPermission _stagingPermission;
+	@Reference
+	private StagingPermission _stagingPermission;
 
 }

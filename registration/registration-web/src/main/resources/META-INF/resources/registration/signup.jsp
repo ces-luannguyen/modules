@@ -2,8 +2,9 @@
 <liferay-ui:success key="userAdded" message="user-added-successfully" />
 
 <liferay-ui:error key="serviceErrorDetails">
-     <liferay-ui:message key="error.user-service-error" arguments='<%= SessionErrors.get(liferayPortletRequest, "serviceErrorDetails") %>' />
+	<liferay-ui:message arguments='<%= SessionErrors.get(liferayPortletRequest, "serviceErrorDetails") %>' key="error.user-service-error" />
 </liferay-ui:error>
+
 <liferay-ui:error key="firstNameEmpty" message="error.firstname-empty" />
 <liferay-ui:error key="firstNameAlphaNumeric" message="error.firstname-alpha-numeric" />
 <liferay-ui:error key="firstNameMax50" message="error.firstname-max50" />
@@ -19,8 +20,6 @@
 <liferay-ui:error key="userNameMax16" message="error.username-max16" />
 <liferay-ui:error key="userNameMin4" message="error.username-min4" />
 <liferay-ui:error key="userNameExist" message="error.username-exist" />
-
-
 
 <liferay-ui:error key="passwordEmpty" message="error.password-empty" />
 <liferay-ui:error key="passwordFormat" message="error.password-format" />
@@ -62,7 +61,6 @@
 </portlet:actionURL>
 
 <div class="container-fluid-1280 edit-assignment">
-
 	<aui:form action="${userActionURL}" name="fm">
 		<h1><liferay-ui:message key="basic-info" /></h3>
 
@@ -76,7 +74,7 @@
 				<aui:input label="first-name" name="first_name">
 					<aui:validator name="required" />
 					<aui:validator name="alphanum" />
-                    <aui:validator name="maxLength">50</aui:validator>
+					<aui:validator name="maxLength">50</aui:validator>
 				</aui:input>
 
 				<%-- Last name field. --%>
@@ -84,7 +82,7 @@
 				<aui:input label="last-name" name="last_name">
 					<aui:validator name="required" />
 					<aui:validator name="alphanum" />
-                    <aui:validator name="maxLength">50</aui:validator>
+					<aui:validator name="maxLength">50</aui:validator>
 				</aui:input>
 
 				<%-- Email address field. --%>
@@ -92,7 +90,7 @@
 				<aui:input label="email-address" name="email_address">
 					<aui:validator name="required" />
 					<aui:validator name="email" />
-                    <aui:validator name="maxLength">50</aui:validator>
+					<aui:validator name="maxLength">50</aui:validator>
 				</aui:input>
 
 				<%-- Username field. --%>
@@ -100,14 +98,13 @@
 				<aui:input label="username" name="username">
 					<aui:validator name="required" />
 					<aui:validator name="alphanum" />
-                    <aui:validator name="rangeLength">[4,16]</aui:validator>
+					<aui:validator name="rangeLength">[4,16]</aui:validator>
 				</aui:input>
 
 				<%-- Male checkbox field. --%>
 
 				<aui:input label="male" name="male" type="checkbox">
 				</aui:input>
-
 
 				<%-- Birthday field. --%>
 				<aui:fieldset label="Birthday">
@@ -119,25 +116,24 @@
 					formName="birthday"
 					monthParam="b_month"
 					monthValue="3"
+					required="true"
 					yearParam="b_year"
 					yearValue="2010"
-					required="true"
 				/>
 
-				
 				<%-- Password field. --%>
 				<aui:input label="password" name="password1" type="password">
 					<aui:validator errorMessage="At least one uppercase, one digit, one special character specified." name="custom">
-		                function(val, fieldNode, ruleValue) {
-		                        var regex = new RegExp(/(?=.*\d)(?=.*[A-Z])(?=.*\W)/i);
-		
-		                        return regex.test(val);
-		                }
-        			</aui:validator>
-        			<aui:validator name="minLength">6</aui:validator>
+						function(val, fieldNode, ruleValue) {
+								var regex = new RegExp(/(?=.*\d)(?=.*[A-Z])(?=.*\W)/i);
+
+								return regex.test(val);
+						}
+					</aui:validator>
+
+					<aui:validator name="minLength">6</aui:validator>
 					<aui:validator name="required" />
 				</aui:input>
-
 
 				<%-- Confirm password field. --%>
 				<aui:input label="confirm-password" name="password2" type="password">
@@ -156,27 +152,28 @@
 				<%-- Homephone field. --%>
 				<aui:input label="home-phone" name="home_phone">
 					<aui:validator name="digits" />
+
 					<aui:validator errorMessage="Only number with 10 digits is allowed." name="custom">
-		                function(val, fieldNode, ruleValue) {
-		                        var regex = new RegExp(/^.{10}$/i);
-		
-		                        return regex.test(val);
-		                }
-        			</aui:validator>
+						function(val, fieldNode, ruleValue) {
+								var regex = new RegExp(/^.{10}$/i);
+
+								return regex.test(val);
+						}
+					</aui:validator>
 				</aui:input>
 
 				<%-- Mobilephone field. --%>
 				<aui:input label="mobile-phone" name="mobile_phone">
 					<aui:validator name="digits" />
-					<aui:validator errorMessage="Only number with 10 digits is allowed." name="custom">
-		                function(val, fieldNode, ruleValue) {
-		                        var regex = new RegExp(/^.{10}$/i);
-		
-		                        return regex.test(val);
-		                }
-        			</aui:validator>
-				</aui:input>
 
+					<aui:validator errorMessage="Only number with 10 digits is allowed." name="custom">
+						function(val, fieldNode, ruleValue) {
+								var regex = new RegExp(/^.{10}$/i);
+
+								return regex.test(val);
+						}
+					</aui:validator>
+				</aui:input>
 			</aui:fieldset>
 		</aui:fieldset-group>
 
@@ -191,42 +188,42 @@
 				<aui:input label="address-1" name="address">
 					<aui:validator name="required" />
 					<aui:validator name="alphanum" />
-                    <aui:validator name="maxLength">255</aui:validator>
+					<aui:validator name="maxLength">255</aui:validator>
 				</aui:input>
 
 				<%-- Address2 field. --%>
 
 				<aui:input label="address-2" name="address2">
 					<aui:validator name="alphanum" />
-                    <aui:validator name="maxLength">255</aui:validator>
+					<aui:validator name="maxLength">255</aui:validator>
 				</aui:input>
 
 				<%-- City field. --%>
 				<aui:input label="city" name="city">
 					<aui:validator name="required" />
 					<aui:validator name="alphanum" />
-                    <aui:validator name="maxLength">255</aui:validator>
+					<aui:validator name="maxLength">255</aui:validator>
 				</aui:input>
-				
+
 				<%-- State field. --%>
 				<aui:input label="state" name="state">
 					<aui:validator name="required" />
 				</aui:input>
 
-
 				<%-- Zipcode field. --%>
 				<aui:input label="zip-code" name="zip">
 					<aui:validator name="digits" />
-					<aui:validator errorMessage="Only number with 5 digits is allowed." name="custom">
-		                function(val, fieldNode, ruleValue) {
-		                        var regex = new RegExp(/^.{5}$/i);
-		
-		                        return regex.test(val);
-		                }
-        			</aui:validator>
-        			<aui:validator name="required" />
-				</aui:input>
 
+					<aui:validator errorMessage="Only number with 5 digits is allowed." name="custom">
+						function(val, fieldNode, ruleValue) {
+								var regex = new RegExp(/^.{5}$/i);
+
+								return regex.test(val);
+						}
+					</aui:validator>
+
+					<aui:validator name="required" />
+				</aui:input>
 			</aui:fieldset>
 		</aui:fieldset-group>
 
@@ -250,16 +247,15 @@
 				<aui:input label="answer" name="security_answer">
 					<aui:validator name="required" />
 					<aui:validator name="alphanum" />
-                    <aui:validator name="maxLength">255</aui:validator>
+					<aui:validator name="maxLength">255</aui:validator>
 				</aui:input>
 
 				<aui:fieldset label="Terms Of Use">
 				</aui:fieldset>
-				
+
 				<%-- Terms of use field. --%>
 				<aui:input label="terms-of-use" name="accepted_tou" type="checkbox">
 				</aui:input>
-
 			</aui:fieldset>
 		</aui:fieldset-group>
 

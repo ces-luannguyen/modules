@@ -25,7 +25,7 @@ package com.liferay.training.monitor.model.impl;
  */
 public class EventImpl extends EventBaseImpl {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. All methods that expect a event model instance should use the {@link com.liferay.training.monitor.model.Event} interface instead.

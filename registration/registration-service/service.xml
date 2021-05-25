@@ -10,7 +10,6 @@
 
 		<column name="userId" primary="true" type="long"></column>
 
-
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long"></column>
@@ -34,16 +33,14 @@
 		<column name="securityQuestion" type="String"></column>
 		<column name="answer" type="String"></column>
 		<column name="termsOfUse" type="boolean"></column>
-		
-		
-		
+
 		<!-- Finders -->
 
-         <!-- Find by username -->
+		<!-- Find by username -->
 
-         <finder name="UserName" return-type="Collection">
-             <finder-column name="userName"></finder-column>
-         </finder>
+		<finder name="UserName" return-type="Collection">
+			<finder-column name="userName"></finder-column>
+		</finder>
 	</entity>
 
 	<!-- Exceptions -->

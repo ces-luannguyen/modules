@@ -46,50 +46,58 @@ import org.osgi.service.component.annotations.Component;
 )
 public class User_ServiceImpl extends User_ServiceBaseImpl {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. Always use <code>com.liferay.training.registration.service.User_ServiceUtil</code> to access the user_ remote service.
 	 */
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. Always use <code>com.liferay.training.registration.service.User_ServiceUtil</code> to access the user_ remote service.
 	 */
-	public User_ addUser_(String userName, String firstName, String lastName, String emailAddress,
-			boolean male, Date birthDay, String password, String confirmPassword, String homePhone, String mobilePhone,
-			String address1, String address2, String city, String state, String zipCode, String securityQuestion,
-			String answer, boolean termsOfUse, ServiceContext serviceContext) throws PortalException {
+	public User_ addUser_(
+			String userName, String firstName, String lastName,
+			String emailAddress, boolean male, Date birthDay, String password,
+			String confirmPassword, String homePhone, String mobilePhone,
+			String address1, String address2, String city, String state,
+			String zipCode, String securityQuestion, String answer,
+			boolean termsOfUse, ServiceContext serviceContext)
+		throws PortalException {
 
-		return user_LocalService.addUser_(userName, firstName, lastName, emailAddress, male, birthDay,
-				password, confirmPassword, homePhone, mobilePhone, address1, address2, city, state, zipCode,
-				securityQuestion, answer, termsOfUse, serviceContext);
+		return user_LocalService.addUser_(
+			userName, firstName, lastName, emailAddress, male, birthDay,
+			password, confirmPassword, homePhone, mobilePhone, address1,
+			address2, city, state, zipCode, securityQuestion, answer,
+			termsOfUse, serviceContext);
 	}
 
 	public User_ deleteUser_(long userId) throws PortalException {
-
 		User_ user = user_LocalService.getUser_(userId);
 
 		return user_LocalService.deleteUser_(user);
 	}
 
 	public User_ getUser_(long userId) throws PortalException {
-
 		User_ user = user_LocalService.getUser_(userId);
 
 		return user;
 	}
 
-	
+	public User_ updateUser__(
+			long userId, String userName, String firstName, String lastName,
+			String emailAddress, boolean male, Date birthDate, String password,
+			String confirmPassword, String homePhone, String mobilePhone,
+			String address1, String address2, String city, String state,
+			String zipCode, String securityQuestion, String answer,
+			boolean termsOfUse, ServiceContext serviceContext)
+		throws PortalException {
 
-	public User_ updateUser__(long userId, String userName, String firstName, String lastName, String emailAddress,
-			boolean male, Date birthDate, String password, String confirmPassword, String homePhone, String mobilePhone,
-			String address1, String address2, String city, String state, String zipCode, String securityQuestion,
-			String answer, boolean termsOfUse, ServiceContext serviceContext) throws PortalException {
-
-		return user_LocalService.updateUser_(userId, userName, firstName, lastName, emailAddress, male, birthDate,
-				password, confirmPassword, homePhone, mobilePhone, address1, address2, city, state, zipCode,
-				securityQuestion, answer, termsOfUse, serviceContext);
-
+		return user_LocalService.updateUser_(
+			userId, userName, firstName, lastName, emailAddress, male,
+			birthDate, password, confirmPassword, homePhone, mobilePhone,
+			address1, address2, city, state, zipCode, securityQuestion, answer,
+			termsOfUse, serviceContext);
 	}
+
 }

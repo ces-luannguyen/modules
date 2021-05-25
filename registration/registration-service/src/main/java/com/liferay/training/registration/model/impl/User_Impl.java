@@ -25,7 +25,7 @@ package com.liferay.training.registration.model.impl;
  */
 public class User_Impl extends User_BaseImpl {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. All methods that expect a user_ model instance should use the {@link com.liferay.training.registration.model.User_} interface instead.

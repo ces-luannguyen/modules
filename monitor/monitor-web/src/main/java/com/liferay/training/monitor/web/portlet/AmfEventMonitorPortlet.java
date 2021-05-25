@@ -1,8 +1,7 @@
 package com.liferay.training.monitor.web.portlet;
 
-import com.liferay.training.monitor.web.constants.AmfEventMonitorPortletKeys;
-
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.training.monitor.web.constants.AmfEventMonitorPortletKeys;
 
 import javax.portlet.Portlet;
 

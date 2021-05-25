@@ -6,6 +6,4 @@ public class MVCCommandNames {
 
 	public static final String SIGN_UP = "/signup";
 
-
-
 }

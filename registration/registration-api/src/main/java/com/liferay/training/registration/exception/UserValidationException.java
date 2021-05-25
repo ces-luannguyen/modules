@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.training.registration.exception;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -22,20 +23,13 @@ import java.util.List;
  */
 public class UserValidationException extends PortalException {
 
-	public UserValidationException(List<String> errors) {
-
-	     super(String.join(",", errors));
-	     _errors = errors;
-	 }
-
-	public List<String> getErrors() {
-
-	     return _errors;
-	 }
-
-	private List<String> _errors;
-	 
 	public UserValidationException() {
+	}
+
+	public UserValidationException(List<String> errors) {
+		super(String.join(",", errors));
+
+		_errors = errors;
 	}
 
 	public UserValidationException(String msg) {
@@ -49,5 +43,11 @@ public class UserValidationException extends PortalException {
 	public UserValidationException(Throwable cause) {
 		super(cause);
 	}
+
+	public List<String> getErrors() {
+		return _errors;
+	}
+
+	private List<String> _errors;
 
 }

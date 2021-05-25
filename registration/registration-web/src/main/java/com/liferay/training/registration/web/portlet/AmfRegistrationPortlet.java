@@ -1,8 +1,7 @@
 package com.liferay.training.registration.web.portlet;
 
-import com.liferay.training.registration.web.constants.AmfRegistrationPortletKeys;
-
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.training.registration.web.constants.AmfRegistrationPortletKeys;
 
 import javax.portlet.Portlet;
 

@@ -164,18 +164,4 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		return eventLocalService.getEventsByEventType(eventType, start, end);
 	}
 	
-	@Reference(
-	        policy = ReferencePolicy.DYNAMIC,
-	        policyOption = ReferencePolicyOption.GREEDY,
-	        target = "(model.class.name=com.liferay.training.monitor.model.Event)"
-	    )
-	    private volatile ModelResourcePermission<Event>
-	        _eventModelResourcePermission;
-
-	    @Reference(
-	        policy = ReferencePolicy.DYNAMIC,
-	        policyOption = ReferencePolicyOption.GREEDY,
-	        target = "(resource.name=" + MonitorConstants.RESOURCE_NAME + ")"
-	    )
-	    private volatile PortletResourcePermission _portletResourcePermission;
 }

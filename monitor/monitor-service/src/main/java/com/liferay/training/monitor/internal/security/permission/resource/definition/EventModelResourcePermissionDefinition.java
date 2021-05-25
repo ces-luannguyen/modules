@@ -6,7 +6,6 @@ import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermi
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionLogic;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.StagedModelPermissionLogic;
-import com.liferay.portal.kernel.security.permission.resource.WorkflowedModelPermissionLogic;
 import com.liferay.portal.kernel.security.permission.resource.definition.ModelResourcePermissionDefinition;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.workflow.permission.WorkflowPermission;
@@ -22,69 +21,66 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author liferay
  */
-@Component(
-    immediate = true, 
-    service = ModelResourcePermissionDefinition.class
-)
+@Component(immediate = true, service = ModelResourcePermissionDefinition.class)
 public class EventModelResourcePermissionDefinition
-    implements ModelResourcePermissionDefinition<Event> {
+	implements ModelResourcePermissionDefinition<Event> {
 
-    @Override
-    public Event getModel(long eventId)
-        throws PortalException {
+	@Override
+	public Event getModel(long eventId) throws PortalException {
+		return _eventLocalService.getEvent(eventId);
+	}
 
-        return _eventLocalService.getEvent(eventId);
-    }
+	@Override
+	public Class<Event> getModelClass() {
+		return Event.class;
+	}
 
-    @Override
-    public Class<Event> getModelClass() {
+	@Override
+	public PortletResourcePermission getPortletResourcePermission() {
+		return _portletResourcePermission;
+	}
 
-        return Event.class;
-    }
+	@Override
+	public long getPrimaryKey(Event event) {
+		return event.getEventId();
+	}
 
-    @Override
-    public PortletResourcePermission getPortletResourcePermission() {
+	@Override
+	public void registerModelResourcePermissionLogics(
+		ModelResourcePermission<Event> modelResourcePermission,
+		Consumer<ModelResourcePermissionLogic<Event>>
+			modelResourcePermissionLogicConsumer) {
 
-        return _portletResourcePermission;
-    }
+		modelResourcePermissionLogicConsumer.accept(
+			new StagedModelPermissionLogic<>(
+				_stagingPermission,
+				"com_liferay_training_monitor_web_AmfEventMonitorPortlet",
+				Event::getEventId));
 
-    @Override
-    public long getPrimaryKey(Event event) {
+		// Only enable if you use (optional) workflow support
 
-        return event.getEventId();
-    }
+		//    modelResourcePermissionLogicConsumer.accept(
+		//        new WorkflowedModelPermissionLogic<>(
+		//            _workflowPermission, modelResourcePermission,
+		//            _groupLocalService, Event::getEventId));
 
-    @Override
-    public void registerModelResourcePermissionLogics(
-        ModelResourcePermission<Event> modelResourcePermission,
-        Consumer<ModelResourcePermissionLogic<Event>> modelResourcePermissionLogicConsumer) {
+	}
 
-        modelResourcePermissionLogicConsumer.accept(
-            new StagedModelPermissionLogic<>(
-                _stagingPermission,
-                "com_liferay_training_monitor_web_AmfEventMonitorPortlet",
-                Event::getEventId));
+	@Reference
+	private EventLocalService _eventLocalService;
 
-        // Only enable if you use (optional) workflow support
+	@Reference
+	private GroupLocalService _groupLocalService;
 
-        //    modelResourcePermissionLogicConsumer.accept(
-        //        new WorkflowedModelPermissionLogic<>(
-        //            _workflowPermission, modelResourcePermission,
-        //            _groupLocalService, Event::getEventId));
-    }
+	@Reference(
+		target = "(resource.name=" + MonitorConstants.RESOURCE_NAME + ")"
+	)
+	private PortletResourcePermission _portletResourcePermission;
 
-    @Reference
-    private EventLocalService _eventLocalService;
+	@Reference
+	private StagingPermission _stagingPermission;
 
-    @Reference
-    private GroupLocalService _groupLocalService;
+	@Reference
+	private WorkflowPermission _workflowPermission;
 
-    @Reference(target = "(resource.name=" + MonitorConstants.RESOURCE_NAME + ")")
-    private PortletResourcePermission _portletResourcePermission;
-
-    @Reference
-    private StagingPermission _stagingPermission;
-
-    @Reference
-    private WorkflowPermission _workflowPermission;
 }

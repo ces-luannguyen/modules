@@ -28,6 +28,4 @@ public class EditUser_MVCRenderCommand implements MVCRenderCommand {
 		return "/registration/signup.jsp";
 	}
 
-	
-
 }
