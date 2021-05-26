@@ -138,7 +138,9 @@ public class User_ModelImpl extends BaseModelImpl<User_> implements User_Model {
 
 	public static final long UUID_COLUMN_BITMASK = 4L;
 
-	public static final long USERID_COLUMN_BITMASK = 8L;
+	public static final long ZIPCODE_COLUMN_BITMASK = 8L;
+
+	public static final long USERID_COLUMN_BITMASK = 16L;
 
 	public static void setEntityCacheEnabled(boolean entityCacheEnabled) {
 		_entityCacheEnabled = entityCacheEnabled;
@@ -756,7 +758,17 @@ public class User_ModelImpl extends BaseModelImpl<User_> implements User_Model {
 
 	@Override
 	public void setZipCode(String zipCode) {
+		_columnBitmask |= ZIPCODE_COLUMN_BITMASK;
+
+		if (_originalZipCode == null) {
+			_originalZipCode = _zipCode;
+		}
+
 		_zipCode = zipCode;
+	}
+
+	public String getOriginalZipCode() {
+		return GetterUtil.getString(_originalZipCode);
 	}
 
 	@JSON
@@ -944,6 +956,8 @@ public class User_ModelImpl extends BaseModelImpl<User_> implements User_Model {
 		user_ModelImpl._originalUserName = user_ModelImpl._userName;
 
 		user_ModelImpl._setModifiedDate = false;
+
+		user_ModelImpl._originalZipCode = user_ModelImpl._zipCode;
 
 		user_ModelImpl._columnBitmask = 0;
 	}
@@ -1214,6 +1228,7 @@ public class User_ModelImpl extends BaseModelImpl<User_> implements User_Model {
 	private String _city;
 	private String _state;
 	private String _zipCode;
+	private String _originalZipCode;
 	private String _securityQuestion;
 	private String _answer;
 	private boolean _termsOfUse;

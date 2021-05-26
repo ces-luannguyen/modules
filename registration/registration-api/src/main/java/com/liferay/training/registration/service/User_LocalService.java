@@ -82,6 +82,8 @@ public interface User_LocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public User_ addUser_(User_ user_);
 
+	public int countUsersByZipCode(String zipCode);
+
 	/**
 	 * Creates a new user_ with the primary key. Does not add the user_ to the database.
 	 *
@@ -267,6 +269,12 @@ public interface User_LocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<User_> getUsersByUserName(String userName);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<User_> getUsersByZipCode(String zipCode);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<User_> getUsersByZipCode(String zipCode, int start, int end);
 
 	public User_ updateUser_(
 			long userId, String userName, String firstName, String lastName,

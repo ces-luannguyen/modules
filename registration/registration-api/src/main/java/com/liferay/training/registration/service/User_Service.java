@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.training.registration.model.User_;
 
 import java.util.Date;
+import java.util.List;
 
 import org.osgi.annotation.versioning.ProviderType;
 
@@ -52,6 +53,12 @@ public interface User_Service extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link User_ServiceUtil} to access the user_ remote service. Add custom service methods to <code>com.liferay.training.registration.service.impl.User_ServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this class directly. Always use <code>User_ServiceUtil</code> to access the user_ remote service.
+	 */
 	public User_ addUser_(
 			String userName, String firstName, String lastName,
 			String emailAddress, boolean male, Date birthDay, String password,
@@ -60,6 +67,8 @@ public interface User_Service extends BaseService {
 			String zipCode, String securityQuestion, String answer,
 			boolean termsOfUse, ServiceContext serviceContext)
 		throws PortalException;
+
+	public int countUsersByZipCode(String zipCode);
 
 	public User_ deleteUser_(long userId) throws PortalException;
 
@@ -72,6 +81,12 @@ public interface User_Service extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public User_ getUser_(long userId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<User_> getUsersByZipCode(String zipCode);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<User_> getUsersByZipCode(String zipCode, int start, int end);
 
 	public User_ updateUser__(
 			long userId, String userName, String firstName, String lastName,

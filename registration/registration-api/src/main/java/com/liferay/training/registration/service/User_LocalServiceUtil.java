@@ -66,6 +66,10 @@ public class User_LocalServiceUtil {
 		return getService().addUser_(user_);
 	}
 
+	public static int countUsersByZipCode(String zipCode) {
+		return getService().countUsersByZipCode(zipCode);
+	}
+
 	/**
 	 * Creates a new user_ with the primary key. Does not add the user_ to the database.
 	 *
@@ -318,6 +322,18 @@ public class User_LocalServiceUtil {
 		getUsersByUserName(String userName) {
 
 		return getService().getUsersByUserName(userName);
+	}
+
+	public static java.util.List<com.liferay.training.registration.model.User_>
+		getUsersByZipCode(String zipCode) {
+
+		return getService().getUsersByZipCode(zipCode);
+	}
+
+	public static java.util.List<com.liferay.training.registration.model.User_>
+		getUsersByZipCode(String zipCode, int start, int end) {
+
+		return getService().getUsersByZipCode(zipCode, start, end);
 	}
 
 	public static com.liferay.training.registration.model.User_ updateUser_(

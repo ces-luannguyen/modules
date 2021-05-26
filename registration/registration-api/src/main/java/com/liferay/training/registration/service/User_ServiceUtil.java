@@ -37,6 +37,12 @@ public class User_ServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.training.registration.service.impl.User_ServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this class directly. Always use <code>User_ServiceUtil</code> to access the user_ remote service.
+	 */
 	public static com.liferay.training.registration.model.User_ addUser_(
 			String userName, String firstName, String lastName,
 			String emailAddress, boolean male, java.util.Date birthDay,
@@ -52,6 +58,10 @@ public class User_ServiceUtil {
 			password, confirmPassword, homePhone, mobilePhone, address1,
 			address2, city, state, zipCode, securityQuestion, answer,
 			termsOfUse, serviceContext);
+	}
+
+	public static int countUsersByZipCode(String zipCode) {
+		return getService().countUsersByZipCode(zipCode);
 	}
 
 	public static com.liferay.training.registration.model.User_ deleteUser_(
@@ -75,6 +85,18 @@ public class User_ServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().getUser_(userId);
+	}
+
+	public static java.util.List<com.liferay.training.registration.model.User_>
+		getUsersByZipCode(String zipCode) {
+
+		return getService().getUsersByZipCode(zipCode);
+	}
+
+	public static java.util.List<com.liferay.training.registration.model.User_>
+		getUsersByZipCode(String zipCode, int start, int end) {
+
+		return getService().getUsersByZipCode(zipCode, start, end);
 	}
 
 	public static com.liferay.training.registration.model.User_ updateUser__(

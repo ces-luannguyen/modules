@@ -480,6 +480,149 @@ public interface User_Persistence extends BasePersistence<User_> {
 	public int countByUserName(String userName);
 
 	/**
+	 * Returns all the user_s where zipCode = &#63;.
+	 *
+	 * @param zipCode the zip code
+	 * @return the matching user_s
+	 */
+	public java.util.List<User_> findByZipCode(String zipCode);
+
+	/**
+	 * Returns a range of all the user_s where zipCode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>User_ModelImpl</code>.
+	 * </p>
+	 *
+	 * @param zipCode the zip code
+	 * @param start the lower bound of the range of user_s
+	 * @param end the upper bound of the range of user_s (not inclusive)
+	 * @return the range of matching user_s
+	 */
+	public java.util.List<User_> findByZipCode(
+		String zipCode, int start, int end);
+
+	/**
+	 * Returns an ordered range of all the user_s where zipCode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>User_ModelImpl</code>.
+	 * </p>
+	 *
+	 * @param zipCode the zip code
+	 * @param start the lower bound of the range of user_s
+	 * @param end the upper bound of the range of user_s (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching user_s
+	 */
+	public java.util.List<User_> findByZipCode(
+		String zipCode, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<User_>
+			orderByComparator);
+
+	/**
+	 * Returns an ordered range of all the user_s where zipCode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>User_ModelImpl</code>.
+	 * </p>
+	 *
+	 * @param zipCode the zip code
+	 * @param start the lower bound of the range of user_s
+	 * @param end the upper bound of the range of user_s (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching user_s
+	 */
+	public java.util.List<User_> findByZipCode(
+		String zipCode, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<User_>
+			orderByComparator,
+		boolean useFinderCache);
+
+	/**
+	 * Returns the first user_ in the ordered set where zipCode = &#63;.
+	 *
+	 * @param zipCode the zip code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching user_
+	 * @throws NoSuchUser_Exception if a matching user_ could not be found
+	 */
+	public User_ findByZipCode_First(
+			String zipCode,
+			com.liferay.portal.kernel.util.OrderByComparator<User_>
+				orderByComparator)
+		throws NoSuchUser_Exception;
+
+	/**
+	 * Returns the first user_ in the ordered set where zipCode = &#63;.
+	 *
+	 * @param zipCode the zip code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching user_, or <code>null</code> if a matching user_ could not be found
+	 */
+	public User_ fetchByZipCode_First(
+		String zipCode,
+		com.liferay.portal.kernel.util.OrderByComparator<User_>
+			orderByComparator);
+
+	/**
+	 * Returns the last user_ in the ordered set where zipCode = &#63;.
+	 *
+	 * @param zipCode the zip code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching user_
+	 * @throws NoSuchUser_Exception if a matching user_ could not be found
+	 */
+	public User_ findByZipCode_Last(
+			String zipCode,
+			com.liferay.portal.kernel.util.OrderByComparator<User_>
+				orderByComparator)
+		throws NoSuchUser_Exception;
+
+	/**
+	 * Returns the last user_ in the ordered set where zipCode = &#63;.
+	 *
+	 * @param zipCode the zip code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching user_, or <code>null</code> if a matching user_ could not be found
+	 */
+	public User_ fetchByZipCode_Last(
+		String zipCode,
+		com.liferay.portal.kernel.util.OrderByComparator<User_>
+			orderByComparator);
+
+	/**
+	 * Returns the user_s before and after the current user_ in the ordered set where zipCode = &#63;.
+	 *
+	 * @param userId the primary key of the current user_
+	 * @param zipCode the zip code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next user_
+	 * @throws NoSuchUser_Exception if a user_ with the primary key could not be found
+	 */
+	public User_[] findByZipCode_PrevAndNext(
+			long userId, String zipCode,
+			com.liferay.portal.kernel.util.OrderByComparator<User_>
+				orderByComparator)
+		throws NoSuchUser_Exception;
+
+	/**
+	 * Removes all the user_s where zipCode = &#63; from the database.
+	 *
+	 * @param zipCode the zip code
+	 */
+	public void removeByZipCode(String zipCode);
+
+	/**
+	 * Returns the number of user_s where zipCode = &#63;.
+	 *
+	 * @param zipCode the zip code
+	 * @return the number of matching user_s
+	 */
+	public int countByZipCode(String zipCode);
+
+	/**
 	 * Caches the user_ in the entity cache if it is enabled.
 	 *
 	 * @param user_ the user_

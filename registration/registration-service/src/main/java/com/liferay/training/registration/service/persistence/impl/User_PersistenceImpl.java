@@ -1742,6 +1742,542 @@ public class User_PersistenceImpl
 	private static final String _FINDER_COLUMN_USERNAME_USERNAME_3 =
 		"(user_.userName IS NULL OR user_.userName = '')";
 
+	private FinderPath _finderPathWithPaginationFindByZipCode;
+	private FinderPath _finderPathWithoutPaginationFindByZipCode;
+	private FinderPath _finderPathCountByZipCode;
+
+	/**
+	 * Returns all the user_s where zipCode = &#63;.
+	 *
+	 * @param zipCode the zip code
+	 * @return the matching user_s
+	 */
+	@Override
+	public List<User_> findByZipCode(String zipCode) {
+		return findByZipCode(
+			zipCode, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the user_s where zipCode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>User_ModelImpl</code>.
+	 * </p>
+	 *
+	 * @param zipCode the zip code
+	 * @param start the lower bound of the range of user_s
+	 * @param end the upper bound of the range of user_s (not inclusive)
+	 * @return the range of matching user_s
+	 */
+	@Override
+	public List<User_> findByZipCode(String zipCode, int start, int end) {
+		return findByZipCode(zipCode, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the user_s where zipCode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>User_ModelImpl</code>.
+	 * </p>
+	 *
+	 * @param zipCode the zip code
+	 * @param start the lower bound of the range of user_s
+	 * @param end the upper bound of the range of user_s (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching user_s
+	 */
+	@Override
+	public List<User_> findByZipCode(
+		String zipCode, int start, int end,
+		OrderByComparator<User_> orderByComparator) {
+
+		return findByZipCode(zipCode, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the user_s where zipCode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>User_ModelImpl</code>.
+	 * </p>
+	 *
+	 * @param zipCode the zip code
+	 * @param start the lower bound of the range of user_s
+	 * @param end the upper bound of the range of user_s (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching user_s
+	 */
+	@Override
+	public List<User_> findByZipCode(
+		String zipCode, int start, int end,
+		OrderByComparator<User_> orderByComparator, boolean useFinderCache) {
+
+		zipCode = Objects.toString(zipCode, "");
+
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+			(orderByComparator == null)) {
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByZipCode;
+				finderArgs = new Object[] {zipCode};
+			}
+		}
+		else if (useFinderCache) {
+			finderPath = _finderPathWithPaginationFindByZipCode;
+			finderArgs = new Object[] {zipCode, start, end, orderByComparator};
+		}
+
+		List<User_> list = null;
+
+		if (useFinderCache) {
+			list = (List<User_>)finderCache.getResult(
+				finderPath, finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (User_ user_ : list) {
+					if (!zipCode.equals(user_.getZipCode())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler sb = null;
+
+			if (orderByComparator != null) {
+				sb = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				sb = new StringBundler(3);
+			}
+
+			sb.append(_SQL_SELECT_USER__WHERE);
+
+			boolean bindZipCode = false;
+
+			if (zipCode.isEmpty()) {
+				sb.append(_FINDER_COLUMN_ZIPCODE_ZIPCODE_3);
+			}
+			else {
+				bindZipCode = true;
+
+				sb.append(_FINDER_COLUMN_ZIPCODE_ZIPCODE_2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(
+					sb, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+			}
+			else {
+				sb.append(User_ModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = sb.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query query = session.createQuery(sql);
+
+				QueryPos queryPos = QueryPos.getInstance(query);
+
+				if (bindZipCode) {
+					queryPos.add(zipCode);
+				}
+
+				list = (List<User_>)QueryUtil.list(
+					query, getDialect(), start, end);
+
+				cacheResult(list);
+
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
+			}
+			catch (Exception exception) {
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
+
+				throw processException(exception);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first user_ in the ordered set where zipCode = &#63;.
+	 *
+	 * @param zipCode the zip code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching user_
+	 * @throws NoSuchUser_Exception if a matching user_ could not be found
+	 */
+	@Override
+	public User_ findByZipCode_First(
+			String zipCode, OrderByComparator<User_> orderByComparator)
+		throws NoSuchUser_Exception {
+
+		User_ user_ = fetchByZipCode_First(zipCode, orderByComparator);
+
+		if (user_ != null) {
+			return user_;
+		}
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		sb.append("zipCode=");
+		sb.append(zipCode);
+
+		sb.append("}");
+
+		throw new NoSuchUser_Exception(sb.toString());
+	}
+
+	/**
+	 * Returns the first user_ in the ordered set where zipCode = &#63;.
+	 *
+	 * @param zipCode the zip code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching user_, or <code>null</code> if a matching user_ could not be found
+	 */
+	@Override
+	public User_ fetchByZipCode_First(
+		String zipCode, OrderByComparator<User_> orderByComparator) {
+
+		List<User_> list = findByZipCode(zipCode, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last user_ in the ordered set where zipCode = &#63;.
+	 *
+	 * @param zipCode the zip code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching user_
+	 * @throws NoSuchUser_Exception if a matching user_ could not be found
+	 */
+	@Override
+	public User_ findByZipCode_Last(
+			String zipCode, OrderByComparator<User_> orderByComparator)
+		throws NoSuchUser_Exception {
+
+		User_ user_ = fetchByZipCode_Last(zipCode, orderByComparator);
+
+		if (user_ != null) {
+			return user_;
+		}
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		sb.append("zipCode=");
+		sb.append(zipCode);
+
+		sb.append("}");
+
+		throw new NoSuchUser_Exception(sb.toString());
+	}
+
+	/**
+	 * Returns the last user_ in the ordered set where zipCode = &#63;.
+	 *
+	 * @param zipCode the zip code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching user_, or <code>null</code> if a matching user_ could not be found
+	 */
+	@Override
+	public User_ fetchByZipCode_Last(
+		String zipCode, OrderByComparator<User_> orderByComparator) {
+
+		int count = countByZipCode(zipCode);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<User_> list = findByZipCode(
+			zipCode, count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the user_s before and after the current user_ in the ordered set where zipCode = &#63;.
+	 *
+	 * @param userId the primary key of the current user_
+	 * @param zipCode the zip code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next user_
+	 * @throws NoSuchUser_Exception if a user_ with the primary key could not be found
+	 */
+	@Override
+	public User_[] findByZipCode_PrevAndNext(
+			long userId, String zipCode,
+			OrderByComparator<User_> orderByComparator)
+		throws NoSuchUser_Exception {
+
+		zipCode = Objects.toString(zipCode, "");
+
+		User_ user_ = findByPrimaryKey(userId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			User_[] array = new User_Impl[3];
+
+			array[0] = getByZipCode_PrevAndNext(
+				session, user_, zipCode, orderByComparator, true);
+
+			array[1] = user_;
+
+			array[2] = getByZipCode_PrevAndNext(
+				session, user_, zipCode, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception exception) {
+			throw processException(exception);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected User_ getByZipCode_PrevAndNext(
+		Session session, User_ user_, String zipCode,
+		OrderByComparator<User_> orderByComparator, boolean previous) {
+
+		StringBundler sb = null;
+
+		if (orderByComparator != null) {
+			sb = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			sb = new StringBundler(3);
+		}
+
+		sb.append(_SQL_SELECT_USER__WHERE);
+
+		boolean bindZipCode = false;
+
+		if (zipCode.isEmpty()) {
+			sb.append(_FINDER_COLUMN_ZIPCODE_ZIPCODE_3);
+		}
+		else {
+			bindZipCode = true;
+
+			sb.append(_FINDER_COLUMN_ZIPCODE_ZIPCODE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				sb.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				sb.append(_ORDER_BY_ENTITY_ALIAS);
+				sb.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						sb.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						sb.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						sb.append(WHERE_GREATER_THAN);
+					}
+					else {
+						sb.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			sb.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				sb.append(_ORDER_BY_ENTITY_ALIAS);
+				sb.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						sb.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						sb.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						sb.append(ORDER_BY_ASC);
+					}
+					else {
+						sb.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			sb.append(User_ModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = sb.toString();
+
+		Query query = session.createQuery(sql);
+
+		query.setFirstResult(0);
+		query.setMaxResults(2);
+
+		QueryPos queryPos = QueryPos.getInstance(query);
+
+		if (bindZipCode) {
+			queryPos.add(zipCode);
+		}
+
+		if (orderByComparator != null) {
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(user_)) {
+
+				queryPos.add(orderByConditionValue);
+			}
+		}
+
+		List<User_> list = query.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the user_s where zipCode = &#63; from the database.
+	 *
+	 * @param zipCode the zip code
+	 */
+	@Override
+	public void removeByZipCode(String zipCode) {
+		for (User_ user_ :
+				findByZipCode(
+					zipCode, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
+			remove(user_);
+		}
+	}
+
+	/**
+	 * Returns the number of user_s where zipCode = &#63;.
+	 *
+	 * @param zipCode the zip code
+	 * @return the number of matching user_s
+	 */
+	@Override
+	public int countByZipCode(String zipCode) {
+		zipCode = Objects.toString(zipCode, "");
+
+		FinderPath finderPath = _finderPathCountByZipCode;
+
+		Object[] finderArgs = new Object[] {zipCode};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler sb = new StringBundler(2);
+
+			sb.append(_SQL_COUNT_USER__WHERE);
+
+			boolean bindZipCode = false;
+
+			if (zipCode.isEmpty()) {
+				sb.append(_FINDER_COLUMN_ZIPCODE_ZIPCODE_3);
+			}
+			else {
+				bindZipCode = true;
+
+				sb.append(_FINDER_COLUMN_ZIPCODE_ZIPCODE_2);
+			}
+
+			String sql = sb.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query query = session.createQuery(sql);
+
+				QueryPos queryPos = QueryPos.getInstance(query);
+
+				if (bindZipCode) {
+					queryPos.add(zipCode);
+				}
+
+				count = (Long)query.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception exception) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(exception);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_ZIPCODE_ZIPCODE_2 =
+		"user_.zipCode = ?";
+
+	private static final String _FINDER_COLUMN_ZIPCODE_ZIPCODE_3 =
+		"(user_.zipCode IS NULL OR user_.zipCode = '')";
+
 	public User_PersistenceImpl() {
 		setModelClass(User_.class);
 
@@ -2044,6 +2580,12 @@ public class User_PersistenceImpl
 			finderCache.removeResult(
 				_finderPathWithoutPaginationFindByUserName, args);
 
+			args = new Object[] {user_ModelImpl.getZipCode()};
+
+			finderCache.removeResult(_finderPathCountByZipCode, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByZipCode, args);
+
 			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(
 				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
@@ -2105,6 +2647,25 @@ public class User_PersistenceImpl
 				finderCache.removeResult(_finderPathCountByUserName, args);
 				finderCache.removeResult(
 					_finderPathWithoutPaginationFindByUserName, args);
+			}
+
+			if ((user_ModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByZipCode.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					user_ModelImpl.getOriginalZipCode()
+				};
+
+				finderCache.removeResult(_finderPathCountByZipCode, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByZipCode, args);
+
+				args = new Object[] {user_ModelImpl.getZipCode()};
+
+				finderCache.removeResult(_finderPathCountByZipCode, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByZipCode, args);
 			}
 		}
 
@@ -2455,6 +3016,25 @@ public class User_PersistenceImpl
 		_finderPathCountByUserName = new FinderPath(
 			entityCacheEnabled, finderCacheEnabled, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUserName",
+			new String[] {String.class.getName()});
+
+		_finderPathWithPaginationFindByZipCode = new FinderPath(
+			entityCacheEnabled, finderCacheEnabled, User_Impl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByZipCode",
+			new String[] {
+				String.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByZipCode = new FinderPath(
+			entityCacheEnabled, finderCacheEnabled, User_Impl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByZipCode",
+			new String[] {String.class.getName()},
+			User_ModelImpl.ZIPCODE_COLUMN_BITMASK);
+
+		_finderPathCountByZipCode = new FinderPath(
+			entityCacheEnabled, finderCacheEnabled, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByZipCode",
 			new String[] {String.class.getName()});
 	}
 

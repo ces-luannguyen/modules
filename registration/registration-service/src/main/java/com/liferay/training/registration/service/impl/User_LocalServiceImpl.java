@@ -155,7 +155,20 @@ public class User_LocalServiceImpl extends User_LocalServiceBaseImpl {
 
         return user_Persistence.findByUserName(userName);
     }
+	
+	public List<User_> getUsersByZipCode(String zipCode) {
+
+        return user_Persistence.findByZipCode(zipCode);
+    }
+	
+	public List<User_> getUsersByZipCode(String zipCode, int start, int end) {
+
+        return user_Persistence.findByZipCode(zipCode, start, end);
+    }
 	 
+	public int countUsersByZipCode(String zipCode) {
+		return user_Persistence.countByZipCode(zipCode);
+	}
 	@Override
 	public User_ addUser_(User_ user) {
 

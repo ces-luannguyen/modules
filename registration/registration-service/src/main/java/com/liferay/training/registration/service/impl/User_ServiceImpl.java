@@ -21,6 +21,7 @@ import com.liferay.training.registration.model.User_;
 import com.liferay.training.registration.service.base.User_ServiceBaseImpl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -99,5 +100,17 @@ public class User_ServiceImpl extends User_ServiceBaseImpl {
 			address1, address2, city, state, zipCode, securityQuestion, answer,
 			termsOfUse, serviceContext);
 	}
+	
+	public List<User_> getUsersByZipCode(String zipCode) {
 
+        return user_LocalService.getUsersByZipCode(zipCode);
+    }
+	
+	public List<User_> getUsersByZipCode(String zipCode, int start, int end) {
+
+        return user_LocalService.getUsersByZipCode(zipCode, start, end);
+    }
+	public int countUsersByZipCode(String zipCode) {
+		return user_LocalService.countUsersByZipCode(zipCode);
+	}
 }

@@ -41,6 +41,10 @@
 		<finder name="UserName" return-type="Collection">
 			<finder-column name="userName"></finder-column>
 		</finder>
+		
+		<finder name="ZipCode" return-type="Collection">
+			<finder-column name="zipCode"></finder-column>
+		</finder>
 	</entity>
 
 	<!-- Exceptions -->

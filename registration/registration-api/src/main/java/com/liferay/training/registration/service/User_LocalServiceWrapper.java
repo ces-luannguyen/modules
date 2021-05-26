@@ -61,6 +61,11 @@ public class User_LocalServiceWrapper
 		return _user_LocalService.addUser_(user_);
 	}
 
+	@Override
+	public int countUsersByZipCode(String zipCode) {
+		return _user_LocalService.countUsersByZipCode(zipCode);
+	}
+
 	/**
 	 * Creates a new user_ with the primary key. Does not add the user_ to the database.
 	 *
@@ -331,6 +336,20 @@ public class User_LocalServiceWrapper
 		getUsersByUserName(String userName) {
 
 		return _user_LocalService.getUsersByUserName(userName);
+	}
+
+	@Override
+	public java.util.List<com.liferay.training.registration.model.User_>
+		getUsersByZipCode(String zipCode) {
+
+		return _user_LocalService.getUsersByZipCode(zipCode);
+	}
+
+	@Override
+	public java.util.List<com.liferay.training.registration.model.User_>
+		getUsersByZipCode(String zipCode, int start, int end) {
+
+		return _user_LocalService.getUsersByZipCode(zipCode, start, end);
 	}
 
 	@Override

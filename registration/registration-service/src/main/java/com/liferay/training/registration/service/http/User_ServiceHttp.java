@@ -226,6 +226,103 @@ public class User_ServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.liferay.training.registration.model.User_>
+		getUsersByZipCode(HttpPrincipal httpPrincipal, String zipCode) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				User_ServiceUtil.class, "getUsersByZipCode",
+				_getUsersByZipCodeParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, zipCode);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List
+				<com.liferay.training.registration.model.User_>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.liferay.training.registration.model.User_>
+		getUsersByZipCode(
+			HttpPrincipal httpPrincipal, String zipCode, int start, int end) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				User_ServiceUtil.class, "getUsersByZipCode",
+				_getUsersByZipCodeParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, zipCode, start, end);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List
+				<com.liferay.training.registration.model.User_>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static int countUsersByZipCode(
+		HttpPrincipal httpPrincipal, String zipCode) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				User_ServiceUtil.class, "countUsersByZipCode",
+				_countUsersByZipCodeParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, zipCode);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(User_ServiceHttp.class);
 
 	private static final Class<?>[] _addUser_ParameterTypes0 = new Class[] {
@@ -248,5 +345,11 @@ public class User_ServiceHttp {
 		String.class, String.class, String.class, String.class, boolean.class,
 		com.liferay.portal.kernel.service.ServiceContext.class
 	};
+	private static final Class<?>[] _getUsersByZipCodeParameterTypes4 =
+		new Class[] {String.class};
+	private static final Class<?>[] _getUsersByZipCodeParameterTypes5 =
+		new Class[] {String.class, int.class, int.class};
+	private static final Class<?>[] _countUsersByZipCodeParameterTypes6 =
+		new Class[] {String.class};
 
 }

@@ -30,6 +30,11 @@ public class User_ServiceWrapper
 		_user_Service = user_Service;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this class directly. Always use <code>User_ServiceUtil</code> to access the user_ remote service.
+	 */
 	@Override
 	public com.liferay.training.registration.model.User_ addUser_(
 			String userName, String firstName, String lastName,
@@ -46,6 +51,11 @@ public class User_ServiceWrapper
 			password, confirmPassword, homePhone, mobilePhone, address1,
 			address2, city, state, zipCode, securityQuestion, answer,
 			termsOfUse, serviceContext);
+	}
+
+	@Override
+	public int countUsersByZipCode(String zipCode) {
+		return _user_Service.countUsersByZipCode(zipCode);
 	}
 
 	@Override
@@ -71,6 +81,20 @@ public class User_ServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _user_Service.getUser_(userId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.training.registration.model.User_>
+		getUsersByZipCode(String zipCode) {
+
+		return _user_Service.getUsersByZipCode(zipCode);
+	}
+
+	@Override
+	public java.util.List<com.liferay.training.registration.model.User_>
+		getUsersByZipCode(String zipCode, int start, int end) {
+
+		return _user_Service.getUsersByZipCode(zipCode, start, end);
 	}
 
 	@Override

@@ -61,6 +61,11 @@ import java.rmi.RemoteException;
  */
 public class User_ServiceSoap {
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this class directly. Always use <code>User_ServiceUtil</code> to access the user_ remote service.
+	 */
 	public static com.liferay.training.registration.model.User_Soap addUser_(
 			String userName, String firstName, String lastName,
 			String emailAddress, boolean male, java.util.Date birthDay,
@@ -146,6 +151,58 @@ public class User_ServiceSoap {
 
 			return com.liferay.training.registration.model.User_Soap.
 				toSoapModel(returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.liferay.training.registration.model.User_Soap[]
+			getUsersByZipCode(String zipCode)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.training.registration.model.User_>
+				returnValue = User_ServiceUtil.getUsersByZipCode(zipCode);
+
+			return com.liferay.training.registration.model.User_Soap.
+				toSoapModels(returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.liferay.training.registration.model.User_Soap[]
+			getUsersByZipCode(String zipCode, int start, int end)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.training.registration.model.User_>
+				returnValue = User_ServiceUtil.getUsersByZipCode(
+					zipCode, start, end);
+
+			return com.liferay.training.registration.model.User_Soap.
+				toSoapModels(returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static int countUsersByZipCode(String zipCode)
+		throws RemoteException {
+
+		try {
+			int returnValue = User_ServiceUtil.countUsersByZipCode(zipCode);
+
+			return returnValue;
 		}
 		catch (Exception exception) {
 			_log.error(exception, exception);
