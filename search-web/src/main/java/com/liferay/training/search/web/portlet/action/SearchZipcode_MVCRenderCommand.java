@@ -15,7 +15,8 @@ import org.osgi.service.component.annotations.Component;
 	immediate = true,
 	property = {
 		"javax.portlet.name=" + AmfSearchPortletKeys.AMFSEARCH,
-		"mvc.command.name=/", "mvc.command.name=" + MVCCommandNames.VIEW_SEARCH_FORM
+		"mvc.command.name=/",
+		"mvc.command.name=" + MVCCommandNames.VIEW_SEARCH_FORM
 	},
 	service = MVCRenderCommand.class
 )
@@ -25,14 +26,16 @@ public class SearchZipcode_MVCRenderCommand implements MVCRenderCommand {
 	public String render(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortletException {
+
 		PortletSession session = renderRequest.getPortletSession();
-		String zipCode = (String) session.getAttribute("LIFERAY_SHARED_zipCode", PortletSession.APPLICATION_SCOPE);
+
+		String zipCode = (String)session.getAttribute(
+			"LIFERAY_SHARED_zipCode", PortletSession.APPLICATION_SCOPE);
 
 		if (zipCode != null)
 
 			renderRequest.setAttribute("zipCode", zipCode);
-        
-        
+
 		return "/view.jsp";
 	}
 

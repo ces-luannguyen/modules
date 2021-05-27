@@ -1,8 +1,7 @@
 <%@ include file="/init.jsp" %>
 
-
 <h2>Search Results for ${zipCode }</h2>
-<liferay-ui:search-container emptyResultsMessage="users-no-found" total="${users_all_count }" delta="5">
+<liferay-ui:search-container delta="5" emptyResultsMessage="users-no-found" total="${users_all_count }">
 	<liferay-ui:search-container-results results="${users_all }">
 	</liferay-ui:search-container-results>
 

@@ -66,7 +66,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			long userId, String userName, Date eventDate, String eventType, String ipAddress,
 			ServiceContext serviceContext) throws PortalException {
 
-		return eventLocalService.addEvent(userId, userName, eventDate, eventType, ipAddress);
+		return eventLocalService.addEvent(userId, userName, eventDate, eventType, ipAddress, serviceContext);
 	}
 
 	public Event deleteEvent(long eventId) throws PortalException {

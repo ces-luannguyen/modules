@@ -14,6 +14,7 @@
 
 package com.liferay.training.monitor.service;
 
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -46,11 +47,11 @@ public class EventLocalServiceWrapper
 	@Override
 	public com.liferay.training.monitor.model.Event addEvent(
 			long userId, String userName, java.util.Date eventDate,
-			String eventType, String ipAddress)
+			String eventType, String ipAddress, ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _eventLocalService.addEvent(
-			userId, userName, eventDate, eventType, ipAddress);
+			userId, userName, eventDate, eventType, ipAddress, serviceContext);
 	}
 
 	@Override

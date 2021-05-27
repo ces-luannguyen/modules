@@ -14,6 +14,8 @@
 
 package com.liferay.training.monitor.service;
 
+import com.liferay.portal.kernel.service.ServiceContext;
+
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
@@ -52,11 +54,11 @@ public class EventLocalServiceUtil {
 
 	public static com.liferay.training.monitor.model.Event addEvent(
 			long userId, String userName, java.util.Date eventDate,
-			String eventType, String ipAddress)
+			String eventType, String ipAddress, ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().addEvent(
-			userId, userName, eventDate, eventType, ipAddress);
+			userId, userName, eventDate, eventType, ipAddress, serviceContext);
 	}
 
 	public static int countByEventType(String eventType) {

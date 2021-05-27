@@ -6,6 +6,7 @@ import com.liferay.portal.kernel.model.BaseModelListener;
 import com.liferay.portal.kernel.model.ModelListener;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
+import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.training.monitor.service.EventService;
 import com.liferay.training.registration.model.User_;
 
@@ -37,9 +38,10 @@ public class UserPostCreateModelListener extends BaseModelListener<User_> {
 		Date eventDate=model.getCreateDate();
 		String eventType = "Registration";
 		String ipAddress = "0.0.0.0";
-		
+		ServiceContext serviceContext =
+                ServiceContextThreadLocal.getServiceContext();
 		try {
-			_eventService.addEvent(userId, userName, eventDate, eventType, ipAddress, null);
+			_eventService.addEvent(userId, userName, eventDate, eventType, ipAddress, serviceContext);
 		} catch (PortalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

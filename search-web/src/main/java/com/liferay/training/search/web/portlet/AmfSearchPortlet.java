@@ -1,8 +1,7 @@
 package com.liferay.training.search.web.portlet;
 
-import com.liferay.training.search.web.constants.AmfSearchPortletKeys;
-
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.training.search.web.constants.AmfSearchPortletKeys;
 
 import javax.portlet.Portlet;
 

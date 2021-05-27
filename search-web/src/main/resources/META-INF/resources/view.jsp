@@ -1,8 +1,10 @@
-<%@page import="com.liferay.training.search.web.constants.MVCCommandNames"%>
+<%@ page import="com.liferay.training.search.web.constants.MVCCommandNames" %>
+
 <%@ include file="/init.jsp" %>
 
 <liferay-ui:error key="zipCode5" message="error.zipcode-5-digit" />
-<liferay-ui:error key="no-permission" message="error.no-permission" />
+<liferay-ui:error key="noPermission" message="error.no-permission" />
+
 <portlet:actionURL name="<%= MVCCommandNames.SEARCH_ZIPCODE %>" var="searchActionURL">
 	<portlet:param name="redirect" value="${param.redirect}" />
 </portlet:actionURL>
@@ -28,13 +30,10 @@
 			</aui:fieldset>
 		</aui:fieldset-group>
 
-
-		
-
 		<%--Buttons. --%>
 
 		<aui:button-row>
-			<aui:button cssClass="btn btn-primary" type="submit" value="Search"/>
+			<aui:button cssClass="btn btn-primary" type="submit" value="Search" />
 		</aui:button-row>
 	</aui:form>
 </div>

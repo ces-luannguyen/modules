@@ -1,37 +1,37 @@
 <?xml version="1.0"?>
- <!DOCTYPE resource-action-mapping PUBLIC "-//Liferay//DTD Resource Action Mapping 7.2.0//EN" "http://www.liferay.com/dtd/liferay-resource-action-mapping_7_2_0.dtd">
- <resource-action-mapping>
-     <model-resource>
-         <model-name>com.liferay.training.registration.model</model-name>
-         <portlet-ref>
-             <portlet-name>com_liferay_training_search_web_AmfSearchPortlet</portlet-name>
-         </portlet-ref>
-         <root>true</root>
-         <permissions>
-             <supports>
-                 <action-key>VIEW_SEARCH</action-key>
-             </supports>
-             <site-member-defaults />
-             <guest-defaults />
-             <guest-unsupported>
-                 <action-key>VIEW_SEARCH</action-key>
-             </guest-unsupported>
-         </permissions>
-     </model-resource>
-     <model-resource>
-         <model-name>com.liferay.training.registration.model.User_</model-name>
-         <portlet-ref>
-             <portlet-name>com_liferay_training_search_web_AmfSearchPortlet</portlet-name>
-         </portlet-ref>
-         <permissions>
-             <supports>
-             </supports>
-             <site-member-defaults>
-             </site-member-defaults>
-             <guest-defaults>
-             </guest-defaults>
-             <guest-unsupported>
-             </guest-unsupported>
-         </permissions>
-     </model-resource>
- </resource-action-mapping>
+<!DOCTYPE resource-action-mapping PUBLIC "-//Liferay//DTD Resource Action Mapping 7.2.0//EN" "http://www.liferay.com/dtd/liferay-resource-action-mapping_7_2_0.dtd">
+<resource-action-mapping>
+	<model-resource>
+		<model-name>com.liferay.training.registration.model</model-name>
+		<portlet-ref>
+			<portlet-name>com_liferay_training_search_web_AmfSearchPortlet</portlet-name>
+		</portlet-ref>
+		<root>true</root>
+		<permissions>
+			<supports>
+				<action-key>VIEW_SEARCH</action-key>
+			</supports>
+			<site-member-defaults />
+			<guest-defaults />
+			<guest-unsupported>
+				<action-key>VIEW_SEARCH</action-key>
+			</guest-unsupported>
+		</permissions>
+	</model-resource>
+	<model-resource>
+		<model-name>com.liferay.training.registration.model.User_</model-name>
+		<portlet-ref>
+			<portlet-name>com_liferay_training_search_web_AmfSearchPortlet</portlet-name>
+		</portlet-ref>
+		<permissions>
+			<supports>
+			</supports>
+			<site-member-defaults>
+			</site-member-defaults>
+			<guest-defaults>
+			</guest-defaults>
+			<guest-unsupported>
+			</guest-unsupported>
+		</permissions>
+	</model-resource>
+</resource-action-mapping>

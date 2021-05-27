@@ -13,29 +13,28 @@ import org.osgi.service.component.annotations.Reference;
  * @author liferay
  */
 @Component(
-    immediate = true, 
-    service = PortletResourcePermissionDefinition.class
+	immediate = true, service = PortletResourcePermissionDefinition.class
 )
 public class AmfSearchPortletResourcePermissionDefinition
-    implements PortletResourcePermissionDefinition {
+	implements PortletResourcePermissionDefinition {
 
-    @Override
-    public PortletResourcePermissionLogic[] getPortletResourcePermissionLogics() {
+	@Override
+	public PortletResourcePermissionLogic[]
+		getPortletResourcePermissionLogics() {
 
-        return new PortletResourcePermissionLogic[] {
-            new StagedPortletPermissionLogic(
-                _stagingPermission,
-                "com_liferay_training_search_web_AmfSearchPortlet")
-        };
-    }
+		return new PortletResourcePermissionLogic[] {
+			new StagedPortletPermissionLogic(
+				_stagingPermission,
+				"com_liferay_training_search_web_AmfSearchPortlet")
+		};
+	}
 
-    @Override
-    public String getResourceName() {
+	@Override
+	public String getResourceName() {
+		return RegistrationConstants.RESOURCE_NAME;
+	}
 
-        return RegistrationConstants.RESOURCE_NAME;
-    }
-
-    @Reference
-    private StagingPermission _stagingPermission;
+	@Reference
+	private StagingPermission _stagingPermission;
 
 }

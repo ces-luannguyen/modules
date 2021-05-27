@@ -76,7 +76,7 @@ public interface EventLocalService
 
 	public Event addEvent(
 			long userId, String userName, Date eventDate, String eventType,
-			String ipAddress)
+			String ipAddress, ServiceContext serviceContext)
 		throws PortalException;
 
 	public int countByEventType(String eventType);

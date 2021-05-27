@@ -1,7 +1,7 @@
 Bundle-Name: registration-api
 Bundle-SymbolicName: com.liferay.training.registration.api
 Bundle-Version: 1.0.0
-Export-Package: \
+Export-Package:\
 	com.liferay.training.registration.exception,\
 	com.liferay.training.registration.model,\
 	com.liferay.training.registration.service,\

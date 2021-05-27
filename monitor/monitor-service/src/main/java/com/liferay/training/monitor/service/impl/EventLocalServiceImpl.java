@@ -55,7 +55,7 @@ public class EventLocalServiceImpl extends EventLocalServiceBaseImpl {
 	 * Never reference this class directly. Use <code>com.liferay.training.monitor.service.EventLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.training.monitor.service.EventLocalServiceUtil</code>.
 	 */
 	public Event addEvent(
-			long userId, String userName, Date eventDate, String eventType, String ipAddress)
+			long userId, String userName, Date eventDate, String eventType, String ipAddress, ServiceContext serviceContext)
 		     throws PortalException {
 
 
@@ -77,8 +77,6 @@ public class EventLocalServiceImpl extends EventLocalServiceBaseImpl {
 		     event.setUserName(userName);
 		     event.setIpAddress(ipAddress);
 		     
-		     ServiceContext serviceContext =
-	                 ServiceContextThreadLocal.getServiceContext();
 		     event.setGroupId(serviceContext.getScopeGroupId());
 		     
 		     // Persist event to database.
