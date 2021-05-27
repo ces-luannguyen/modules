@@ -65,11 +65,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	public Event addEvent(
 			long userId, String userName, Date eventDate, String eventType, String ipAddress,
 			ServiceContext serviceContext) throws PortalException {
-		// Check permissions.
 
-//        _portletResourcePermission.check(
-//            getPermissionChecker(), serviceContext.getScopeGroupId(),
-//            ActionKeys.ADD_ENTRY);
 		return eventLocalService.addEvent(userId, userName, eventDate, eventType, ipAddress);
 	}
 

@@ -2,7 +2,7 @@
 <%@ include file="/init.jsp" %>
 
 <liferay-ui:error key="zipCode5" message="error.zipcode-5-digit" />
-
+<liferay-ui:error key="no-permission" message="error.no-permission" />
 <portlet:actionURL name="<%= MVCCommandNames.SEARCH_ZIPCODE %>" var="searchActionURL">
 	<portlet:param name="redirect" value="${param.redirect}" />
 </portlet:actionURL>

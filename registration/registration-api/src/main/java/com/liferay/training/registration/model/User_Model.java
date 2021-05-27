@@ -16,6 +16,7 @@ package com.liferay.training.registration.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
+import com.liferay.portal.kernel.model.GroupedModel;
 import com.liferay.portal.kernel.model.ShardedModel;
 import com.liferay.portal.kernel.model.StagedAuditedModel;
 
@@ -36,7 +37,7 @@ import org.osgi.annotation.versioning.ProviderType;
  */
 @ProviderType
 public interface User_Model
-	extends BaseModel<User_>, ShardedModel, StagedAuditedModel {
+	extends BaseModel<User_>, GroupedModel, ShardedModel, StagedAuditedModel {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -122,6 +123,22 @@ public interface User_Model
 	 */
 	@Override
 	public void setCompanyId(long companyId);
+
+	/**
+	 * Returns the group ID of this user_.
+	 *
+	 * @return the group ID of this user_
+	 */
+	@Override
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this user_.
+	 *
+	 * @param groupId the group ID of this user_
+	 */
+	@Override
+	public void setGroupId(long groupId);
 
 	/**
 	 * Returns the user name of this user_.

@@ -215,17 +215,17 @@ public class User_LocalServiceWrapper
 	}
 
 	/**
-	 * Returns the user_ with the matching UUID and company.
+	 * Returns the user_ matching the UUID and group.
 	 *
 	 * @param uuid the user_'s UUID
-	 * @param companyId the primary key of the company
+	 * @param groupId the primary key of the group
 	 * @return the matching user_, or <code>null</code> if a matching user_ could not be found
 	 */
 	@Override
 	public com.liferay.training.registration.model.User_
-		fetchUser_ByUuidAndCompanyId(String uuid, long companyId) {
+		fetchUser_ByUuidAndGroupId(String uuid, long groupId) {
 
-		return _user_LocalService.fetchUser_ByUuidAndCompanyId(uuid, companyId);
+		return _user_LocalService.fetchUser_ByUuidAndGroupId(uuid, groupId);
 	}
 
 	@Override
@@ -288,19 +288,19 @@ public class User_LocalServiceWrapper
 	}
 
 	/**
-	 * Returns the user_ with the matching UUID and company.
+	 * Returns the user_ matching the UUID and group.
 	 *
 	 * @param uuid the user_'s UUID
-	 * @param companyId the primary key of the company
+	 * @param groupId the primary key of the group
 	 * @return the matching user_
 	 * @throws PortalException if a matching user_ could not be found
 	 */
 	@Override
 	public com.liferay.training.registration.model.User_
-			getUser_ByUuidAndCompanyId(String uuid, long companyId)
+			getUser_ByUuidAndGroupId(String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _user_LocalService.getUser_ByUuidAndCompanyId(uuid, companyId);
+		return _user_LocalService.getUser_ByUuidAndGroupId(uuid, groupId);
 	}
 
 	/**
@@ -319,6 +319,42 @@ public class User_LocalServiceWrapper
 		getUser_s(int start, int end) {
 
 		return _user_LocalService.getUser_s(start, end);
+	}
+
+	/**
+	 * Returns all the user_s matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the user_s
+	 * @param companyId the primary key of the company
+	 * @return the matching user_s, or an empty list if no matches were found
+	 */
+	@Override
+	public java.util.List<com.liferay.training.registration.model.User_>
+		getUser_sByUuidAndCompanyId(String uuid, long companyId) {
+
+		return _user_LocalService.getUser_sByUuidAndCompanyId(uuid, companyId);
+	}
+
+	/**
+	 * Returns a range of user_s matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the user_s
+	 * @param companyId the primary key of the company
+	 * @param start the lower bound of the range of user_s
+	 * @param end the upper bound of the range of user_s (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the range of matching user_s, or an empty list if no matches were found
+	 */
+	@Override
+	public java.util.List<com.liferay.training.registration.model.User_>
+		getUser_sByUuidAndCompanyId(
+			String uuid, long companyId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.training.registration.model.User_>
+					orderByComparator) {
+
+		return _user_LocalService.getUser_sByUuidAndCompanyId(
+			uuid, companyId, start, end, orderByComparator);
 	}
 
 	/**

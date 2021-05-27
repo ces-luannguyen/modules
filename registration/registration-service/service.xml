@@ -13,6 +13,7 @@
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long"></column>
+		<column name="groupId" type="long"></column>
 		<column name="userName" type="String"></column>
 		<column name="createDate" type="Date"></column>
 		<column name="modifiedDate" type="Date"></column>

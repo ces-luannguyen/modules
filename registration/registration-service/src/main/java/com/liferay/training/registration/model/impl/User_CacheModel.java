@@ -60,7 +60,7 @@ public class User_CacheModel implements CacheModel<User_>, Externalizable {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -68,6 +68,8 @@ public class User_CacheModel implements CacheModel<User_>, Externalizable {
 		sb.append(userId);
 		sb.append(", companyId=");
 		sb.append(companyId);
+		sb.append(", groupId=");
+		sb.append(groupId);
 		sb.append(", userName=");
 		sb.append(userName);
 		sb.append(", createDate=");
@@ -126,6 +128,7 @@ public class User_CacheModel implements CacheModel<User_>, Externalizable {
 
 		user_Impl.setUserId(userId);
 		user_Impl.setCompanyId(companyId);
+		user_Impl.setGroupId(groupId);
 
 		if (userName == null) {
 			user_Impl.setUserName("");
@@ -269,6 +272,8 @@ public class User_CacheModel implements CacheModel<User_>, Externalizable {
 		userId = objectInput.readLong();
 
 		companyId = objectInput.readLong();
+
+		groupId = objectInput.readLong();
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
@@ -305,6 +310,8 @@ public class User_CacheModel implements CacheModel<User_>, Externalizable {
 		objectOutput.writeLong(userId);
 
 		objectOutput.writeLong(companyId);
+
+		objectOutput.writeLong(groupId);
 
 		if (userName == null) {
 			objectOutput.writeUTF("");
@@ -423,6 +430,7 @@ public class User_CacheModel implements CacheModel<User_>, Externalizable {
 	public String uuid;
 	public long userId;
 	public long companyId;
+	public long groupId;
 	public String userName;
 	public long createDate;
 	public long modifiedDate;

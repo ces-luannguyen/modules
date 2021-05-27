@@ -218,15 +218,15 @@ public abstract class User_LocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the user_ with the matching UUID and company.
+	 * Returns the user_ matching the UUID and group.
 	 *
 	 * @param uuid the user_'s UUID
-	 * @param companyId the primary key of the company
+	 * @param groupId the primary key of the group
 	 * @return the matching user_, or <code>null</code> if a matching user_ could not be found
 	 */
 	@Override
-	public User_ fetchUser_ByUuidAndCompanyId(String uuid, long companyId) {
-		return user_Persistence.fetchByUuid_C_First(uuid, companyId, null);
+	public User_ fetchUser_ByUuidAndGroupId(String uuid, long groupId) {
+		return user_Persistence.fetchByUUID_G(uuid, groupId);
 	}
 
 	/**
@@ -370,18 +370,51 @@ public abstract class User_LocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the user_ with the matching UUID and company.
+	 * Returns all the user_s matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the user_s
+	 * @param companyId the primary key of the company
+	 * @return the matching user_s, or an empty list if no matches were found
+	 */
+	@Override
+	public List<User_> getUser_sByUuidAndCompanyId(
+		String uuid, long companyId) {
+
+		return user_Persistence.findByUuid_C(uuid, companyId);
+	}
+
+	/**
+	 * Returns a range of user_s matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the user_s
+	 * @param companyId the primary key of the company
+	 * @param start the lower bound of the range of user_s
+	 * @param end the upper bound of the range of user_s (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the range of matching user_s, or an empty list if no matches were found
+	 */
+	@Override
+	public List<User_> getUser_sByUuidAndCompanyId(
+		String uuid, long companyId, int start, int end,
+		OrderByComparator<User_> orderByComparator) {
+
+		return user_Persistence.findByUuid_C(
+			uuid, companyId, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns the user_ matching the UUID and group.
 	 *
 	 * @param uuid the user_'s UUID
-	 * @param companyId the primary key of the company
+	 * @param groupId the primary key of the group
 	 * @return the matching user_
 	 * @throws PortalException if a matching user_ could not be found
 	 */
 	@Override
-	public User_ getUser_ByUuidAndCompanyId(String uuid, long companyId)
+	public User_ getUser_ByUuidAndGroupId(String uuid, long groupId)
 		throws PortalException {
 
-		return user_Persistence.findByUuid_C_First(uuid, companyId, null);
+		return user_Persistence.findByUUID_G(uuid, groupId);
 	}
 
 	/**

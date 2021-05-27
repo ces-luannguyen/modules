@@ -74,17 +74,17 @@ public class User_ModelImpl extends BaseModelImpl<User_> implements User_Model {
 
 	public static final Object[][] TABLE_COLUMNS = {
 		{"uuid_", Types.VARCHAR}, {"userId", Types.BIGINT},
-		{"companyId", Types.BIGINT}, {"userName", Types.VARCHAR},
-		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
-		{"firstName", Types.VARCHAR}, {"lastName", Types.VARCHAR},
-		{"emailAddress", Types.VARCHAR}, {"male", Types.BOOLEAN},
-		{"birthDay", Types.TIMESTAMP}, {"password_", Types.VARCHAR},
-		{"confirmPassword", Types.VARCHAR}, {"homePhone", Types.VARCHAR},
-		{"mobilePhone", Types.VARCHAR}, {"address1", Types.VARCHAR},
-		{"address2", Types.VARCHAR}, {"city", Types.VARCHAR},
-		{"state_", Types.VARCHAR}, {"zipCode", Types.VARCHAR},
-		{"securityQuestion", Types.VARCHAR}, {"answer", Types.VARCHAR},
-		{"termsOfUse", Types.BOOLEAN}
+		{"companyId", Types.BIGINT}, {"groupId", Types.BIGINT},
+		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP}, {"firstName", Types.VARCHAR},
+		{"lastName", Types.VARCHAR}, {"emailAddress", Types.VARCHAR},
+		{"male", Types.BOOLEAN}, {"birthDay", Types.TIMESTAMP},
+		{"password_", Types.VARCHAR}, {"confirmPassword", Types.VARCHAR},
+		{"homePhone", Types.VARCHAR}, {"mobilePhone", Types.VARCHAR},
+		{"address1", Types.VARCHAR}, {"address2", Types.VARCHAR},
+		{"city", Types.VARCHAR}, {"state_", Types.VARCHAR},
+		{"zipCode", Types.VARCHAR}, {"securityQuestion", Types.VARCHAR},
+		{"answer", Types.VARCHAR}, {"termsOfUse", Types.BOOLEAN}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -94,6 +94,7 @@ public class User_ModelImpl extends BaseModelImpl<User_> implements User_Model {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
@@ -117,7 +118,7 @@ public class User_ModelImpl extends BaseModelImpl<User_> implements User_Model {
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table Registration_User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,firstName VARCHAR(75) null,lastName VARCHAR(75) null,emailAddress VARCHAR(75) null,male BOOLEAN,birthDay DATE null,password_ VARCHAR(75) null,confirmPassword VARCHAR(75) null,homePhone VARCHAR(75) null,mobilePhone VARCHAR(75) null,address1 VARCHAR(75) null,address2 VARCHAR(75) null,city VARCHAR(75) null,state_ VARCHAR(75) null,zipCode VARCHAR(75) null,securityQuestion VARCHAR(75) null,answer VARCHAR(75) null,termsOfUse BOOLEAN)";
+		"create table Registration_User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,groupId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,firstName VARCHAR(75) null,lastName VARCHAR(75) null,emailAddress VARCHAR(75) null,male BOOLEAN,birthDay DATE null,password_ VARCHAR(75) null,confirmPassword VARCHAR(75) null,homePhone VARCHAR(75) null,mobilePhone VARCHAR(75) null,address1 VARCHAR(75) null,address2 VARCHAR(75) null,city VARCHAR(75) null,state_ VARCHAR(75) null,zipCode VARCHAR(75) null,securityQuestion VARCHAR(75) null,answer VARCHAR(75) null,termsOfUse BOOLEAN)";
 
 	public static final String TABLE_SQL_DROP = "drop table Registration_User_";
 
@@ -134,13 +135,15 @@ public class User_ModelImpl extends BaseModelImpl<User_> implements User_Model {
 
 	public static final long COMPANYID_COLUMN_BITMASK = 1L;
 
-	public static final long USERNAME_COLUMN_BITMASK = 2L;
+	public static final long GROUPID_COLUMN_BITMASK = 2L;
 
-	public static final long UUID_COLUMN_BITMASK = 4L;
+	public static final long USERNAME_COLUMN_BITMASK = 4L;
 
-	public static final long ZIPCODE_COLUMN_BITMASK = 8L;
+	public static final long UUID_COLUMN_BITMASK = 8L;
 
-	public static final long USERID_COLUMN_BITMASK = 16L;
+	public static final long ZIPCODE_COLUMN_BITMASK = 16L;
+
+	public static final long USERID_COLUMN_BITMASK = 32L;
 
 	public static void setEntityCacheEnabled(boolean entityCacheEnabled) {
 		_entityCacheEnabled = entityCacheEnabled;
@@ -166,6 +169,7 @@ public class User_ModelImpl extends BaseModelImpl<User_> implements User_Model {
 		model.setUuid(soapModel.getUuid());
 		model.setUserId(soapModel.getUserId());
 		model.setCompanyId(soapModel.getCompanyId());
+		model.setGroupId(soapModel.getGroupId());
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
@@ -340,6 +344,9 @@ public class User_ModelImpl extends BaseModelImpl<User_> implements User_Model {
 		attributeGetterFunctions.put("companyId", User_::getCompanyId);
 		attributeSetterBiConsumers.put(
 			"companyId", (BiConsumer<User_, Long>)User_::setCompanyId);
+		attributeGetterFunctions.put("groupId", User_::getGroupId);
+		attributeSetterBiConsumers.put(
+			"groupId", (BiConsumer<User_, Long>)User_::setGroupId);
 		attributeGetterFunctions.put("userName", User_::getUserName);
 		attributeSetterBiConsumers.put(
 			"userName", (BiConsumer<User_, String>)User_::setUserName);
@@ -485,6 +492,29 @@ public class User_ModelImpl extends BaseModelImpl<User_> implements User_Model {
 
 	public long getOriginalCompanyId() {
 		return _originalCompanyId;
+	}
+
+	@JSON
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_columnBitmask |= GROUPID_COLUMN_BITMASK;
+
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
+		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	@JSON
@@ -865,6 +895,7 @@ public class User_ModelImpl extends BaseModelImpl<User_> implements User_Model {
 		user_Impl.setUuid(getUuid());
 		user_Impl.setUserId(getUserId());
 		user_Impl.setCompanyId(getCompanyId());
+		user_Impl.setGroupId(getGroupId());
 		user_Impl.setUserName(getUserName());
 		user_Impl.setCreateDate(getCreateDate());
 		user_Impl.setModifiedDate(getModifiedDate());
@@ -953,6 +984,10 @@ public class User_ModelImpl extends BaseModelImpl<User_> implements User_Model {
 
 		user_ModelImpl._setOriginalCompanyId = false;
 
+		user_ModelImpl._originalGroupId = user_ModelImpl._groupId;
+
+		user_ModelImpl._setOriginalGroupId = false;
+
 		user_ModelImpl._originalUserName = user_ModelImpl._userName;
 
 		user_ModelImpl._setModifiedDate = false;
@@ -977,6 +1012,8 @@ public class User_ModelImpl extends BaseModelImpl<User_> implements User_Model {
 		user_CacheModel.userId = getUserId();
 
 		user_CacheModel.companyId = getCompanyId();
+
+		user_CacheModel.groupId = getGroupId();
 
 		user_CacheModel.userName = getUserName();
 
@@ -1209,6 +1246,9 @@ public class User_ModelImpl extends BaseModelImpl<User_> implements User_Model {
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
+	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private String _userName;
 	private String _originalUserName;
 	private Date _createDate;

@@ -70,6 +70,7 @@ public class User_LocalServiceImpl extends User_LocalServiceBaseImpl {
 		
 	     	_userValidator.validate(userName, firstName, lastName, emailAddress, birthDay, password, confirmPassword, homePhone, mobilePhone, address1, address2, city, state, zipCode, securityQuestion, answer, termsOfUse);
 
+	     	
 		     // Generate primary key for the user.
 
 		     long userId =
@@ -80,7 +81,7 @@ public class User_LocalServiceImpl extends User_LocalServiceBaseImpl {
 		     User_ user = createUser_(userId);
 
 		     // Populate fields.
-
+		     user.setGroupId(serviceContext.getScopeGroupId());
 		     user.setCompanyId(CompanyLocalServiceUtil.getCompanyByMx(PropsUtil.get(PropsKeys.COMPANY_DEFAULT_WEB_ID)).getCompanyId());
 		     user.setCreateDate(serviceContext.getCreateDate(new Date()));
 		     user.setModifiedDate(serviceContext.getModifiedDate(new Date()));

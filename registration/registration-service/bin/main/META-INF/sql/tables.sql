@@ -2,6 +2,7 @@ create table Registration_User_ (
 	uuid_ VARCHAR(75) null,
 	userId LONG not null primary key,
 	companyId LONG,
+	groupId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,

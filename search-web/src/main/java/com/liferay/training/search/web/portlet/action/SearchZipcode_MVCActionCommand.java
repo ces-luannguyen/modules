@@ -3,9 +3,12 @@ package com.liferay.training.search.web.portlet.action;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.training.search.web.constants.AmfSearchPortletKeys;
 import com.liferay.training.search.web.constants.MVCCommandNames;
+import com.liferay.training.search.web.internal.security.permission.resource.AmfSearchTopLevelPermission;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -33,6 +36,18 @@ public class SearchZipcode_MVCActionCommand extends BaseMVCActionCommand {
     protected void doProcessAction(
         ActionRequest actionRequest, ActionResponse actionResponse)
         throws Exception {
+    	ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest
+				.getAttribute(WebKeys.THEME_DISPLAY);
+		if (!AmfSearchTopLevelPermission.contains(
+				themeDisplay.getPermissionChecker(),
+				themeDisplay.getScopeGroupId(), "VIEW_SEARCH")) {
+			SessionErrors.add(actionRequest, "no-permission");
+			actionResponse.setRenderParameter(
+	                "mvcRenderCommandName", MVCCommandNames.VIEW_SEARCH_FORM); 
+			return;
+		}
+		
+		
     	String zip = ParamUtil.getString(actionRequest, "zip");
     	
     	if (!zip.matches("^[0-9]{5}$")) {

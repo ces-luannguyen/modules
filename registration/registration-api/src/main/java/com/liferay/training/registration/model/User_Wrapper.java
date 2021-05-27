@@ -45,6 +45,7 @@ public class User_Wrapper
 		attributes.put("uuid", getUuid());
 		attributes.put("userId", getUserId());
 		attributes.put("companyId", getCompanyId());
+		attributes.put("groupId", getGroupId());
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
@@ -87,6 +88,12 @@ public class User_Wrapper
 
 		if (companyId != null) {
 			setCompanyId(companyId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
 		}
 
 		String userName = (String)attributes.get("userName");
@@ -308,6 +315,16 @@ public class User_Wrapper
 	@Override
 	public String getFirstName() {
 		return model.getFirstName();
+	}
+
+	/**
+	 * Returns the group ID of this user_.
+	 *
+	 * @return the group ID of this user_
+	 */
+	@Override
+	public long getGroupId() {
+		return model.getGroupId();
 	}
 
 	/**
@@ -583,6 +600,16 @@ public class User_Wrapper
 	@Override
 	public void setFirstName(String firstName) {
 		model.setFirstName(firstName);
+	}
+
+	/**
+	 * Sets the group ID of this user_.
+	 *
+	 * @param groupId the group ID of this user_
+	 */
+	@Override
+	public void setGroupId(long groupId) {
+		model.setGroupId(groupId);
 	}
 
 	/**

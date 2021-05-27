@@ -189,14 +189,14 @@ public interface User_LocalService
 	public User_ fetchUser_(long userId);
 
 	/**
-	 * Returns the user_ with the matching UUID and company.
+	 * Returns the user_ matching the UUID and group.
 	 *
 	 * @param uuid the user_'s UUID
-	 * @param companyId the primary key of the company
+	 * @param groupId the primary key of the group
 	 * @return the matching user_, or <code>null</code> if a matching user_ could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public User_ fetchUser_ByUuidAndCompanyId(String uuid, long companyId);
+	public User_ fetchUser_ByUuidAndGroupId(String uuid, long groupId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -234,15 +234,15 @@ public interface User_LocalService
 	public User_ getUser_(long userId) throws PortalException;
 
 	/**
-	 * Returns the user_ with the matching UUID and company.
+	 * Returns the user_ matching the UUID and group.
 	 *
 	 * @param uuid the user_'s UUID
-	 * @param companyId the primary key of the company
+	 * @param groupId the primary key of the group
 	 * @return the matching user_
 	 * @throws PortalException if a matching user_ could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public User_ getUser_ByUuidAndCompanyId(String uuid, long companyId)
+	public User_ getUser_ByUuidAndGroupId(String uuid, long groupId)
 		throws PortalException;
 
 	/**
@@ -258,6 +258,31 @@ public interface User_LocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<User_> getUser_s(int start, int end);
+
+	/**
+	 * Returns all the user_s matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the user_s
+	 * @param companyId the primary key of the company
+	 * @return the matching user_s, or an empty list if no matches were found
+	 */
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<User_> getUser_sByUuidAndCompanyId(String uuid, long companyId);
+
+	/**
+	 * Returns a range of user_s matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the user_s
+	 * @param companyId the primary key of the company
+	 * @param start the lower bound of the range of user_s
+	 * @param end the upper bound of the range of user_s (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the range of matching user_s, or an empty list if no matches were found
+	 */
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<User_> getUser_sByUuidAndCompanyId(
+		String uuid, long companyId, int start, int end,
+		OrderByComparator<User_> orderByComparator);
 
 	/**
 	 * Returns the number of user_s.
